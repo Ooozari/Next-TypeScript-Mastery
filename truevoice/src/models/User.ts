@@ -22,6 +22,7 @@ const messageSchema: Schema<Imessage> = new Schema({
 
 // User Interface
 export interface IUser extends Document {
+
     username: string,
     email: string,
     password: string,

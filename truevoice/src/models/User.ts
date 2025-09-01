@@ -27,6 +27,7 @@ export interface IUser extends Document {
     password: string,
     verifyCode: string,
     verifyCodeExpiry: Date,
+    // If User have verify its email through OTP code
     isVerified: boolean,
     isAcceptingMsg: boolean,
     message: Imessage[]

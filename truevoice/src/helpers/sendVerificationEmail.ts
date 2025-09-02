@@ -1,39 +1,31 @@
-// RESEND API URL
 import { resend } from "@/lib/resend";
 import VerificationEmail from "../../emails/VerificationEmail";
 import { ApiResponse } from "@/types/ApiResponse";
-import { error } from "console";
-
-// Email Template + Send email
-
 
 export async function sendverificationEmail(
-    email: string,
-    username: string,
-    verifyCode: string,
-
+  email: string,
+  username: string,
+  verifyCode: string
 ): Promise<ApiResponse> {
+    console.log("Failed to send verification email to:", email);
+  try {
+    const { data, error } = await resend.emails.send({
+      from: 'Acme <onboarding@resend.dev>',  // keep this domain for testing
+      to: String(email).trim(),
+      subject: "TRUE VOICE | Verification Code",
+      react: VerificationEmail({ username, otp: verifyCode }),
+    });
 
-
-
-    try {
-        // Sending email
-            await resend.emails.send({
-            from: 'True Voice <onboarding@resend.dev>',
-            to: email,
-            subject: "TRUE VOICE | Verification Code",
-            react: VerificationEmail({username, otp: verifyCode}),
-        });
-        return {
-            success: true,
-            message: "Verification email sent successfully"
-        }
-    } catch (emailError) {
-        console.error("Error sending verfication email", emailError)
-        return {
-            success: false,
-            message: "Failed to send verification email"
-        }
-
+    if (error) {
+      console.error("Resend Error:", error);
+      return { success: false, message: "Failed to send verification email" };
     }
+            
+
+    console.log("Resend Success:", data);
+    return { success: true, message: "Verification email sent successfully" };
+  } catch (err) {
+    console.error("Unexpected Error:", err);
+    return { success: false, message: "Server error sending verification email" };
+  }
 }

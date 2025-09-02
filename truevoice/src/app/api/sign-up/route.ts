@@ -16,7 +16,13 @@ export async function POST(request: Request) {
 
     try {
         // value from frontend
-        const { username, email, password } = await request.json()
+        const body = await request.json();
+        console.log("Raw Body:", body);  // Debugging line
+
+        const { username, email, password } = body;
+        console.log("Username:", username);
+        console.log("Email:", email);
+        console.log("Password:", password);
 
         // Case 1: By Username in signUp
         const existingUserByUsername = await UserModel.findOne({
@@ -55,13 +61,13 @@ export async function POST(request: Request) {
                     {
                         status: 400,
                     })
-            // User has some how forget his password and want to create a new passord for it
+                // User has some how forget his password and want to create a new passord for it
             } else {
 
                 const hashedPassword = await bcrypt.hash(password, 10);
                 existingUserByEmail.password = hashedPassword
                 existingUserByEmail.verifyCode = OTP,
-                existingUserByEmail.verifyCodeExpiry = new Date(Date.now() + 3600000)
+                    existingUserByEmail.verifyCodeExpiry = new Date(Date.now() + 3600000)
                 await existingUserByEmail.save()
             }
         }
@@ -87,10 +93,9 @@ export async function POST(request: Request) {
         }
 
         // sending verification email is user can be created 
-
         const emailResponse = await sendverificationEmail(
-            username,
             email,
+            username,
             OTP,
         )
 

@@ -1,13 +1,9 @@
 import dbConnect from "@/lib/dbConnect";
 import UserModel, { Imessage } from "@/models/User";
-import { log } from "console";
-
-
 
 export async function POST(request: Request) {
     await dbConnect()
     const { username, content } = await request.json()
-
 
     try {
         const user = await UserModel.findOne({username})

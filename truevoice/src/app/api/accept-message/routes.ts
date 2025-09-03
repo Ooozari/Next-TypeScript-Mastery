@@ -78,15 +78,13 @@ export async function GET(request: Request) {
     await dbConnect();
     // STEP 1:
     // Grabbing User from Session
-    const session = await getServerSession(authOptions)
-    const user: User = session?.user as User // User (from the sesssion)
-    if (!user && !session) {
-        return Response.json({
-            success: false,
-            message: "Not Authenticated",
-        }, {
-            status: 401
-        })
+    const session = await getServerSession(authOptions);
+    const user: User = session?.user as User;
+    if (!session || !user) {
+        return Response.json(
+            { success: false, message: 'Not authenticated' },
+            { status: 401 }
+        );
     }
 
     try {

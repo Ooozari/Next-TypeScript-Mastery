@@ -29,7 +29,7 @@ export async function POST(request: Request) {
 
     //STEP 3: TRY/CATCH
     try {
-        const updated = UserModel.findByIdAndUpdate(
+        const updated = await UserModel.findByIdAndUpdate(
             // Update by
             userId,
             //update to
@@ -52,7 +52,7 @@ export async function POST(request: Request) {
 
         //Message acceptance status has been updated
         return Response.json({
-            success: false,
+            success: true,
             message: "Message acceptance status updated successfully",
             updated,
         }, {
@@ -91,9 +91,6 @@ export async function GET(request: Request) {
         })
     }
 
-
-
-
     try {
 
         //STEP 2: Getting user
@@ -112,11 +109,9 @@ export async function GET(request: Request) {
             success: true,
             isAcceptingMsg: foundUser.isAcceptingMsg
         }, {
-            status: 401
+            status: 200
         })
 
-
-        //STEP 3: TRY/CATCH
     }
     catch (error) {
         console.error("Failed to update the accepting status", error);

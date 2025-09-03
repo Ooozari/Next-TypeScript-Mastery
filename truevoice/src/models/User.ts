@@ -31,7 +31,7 @@ export interface IUser extends Document {
     // If User have verify its email through OTP code
     isVerified: boolean,
     isAcceptingMsg: boolean,
-    message: Imessage[]
+    messages: Imessage[]
 }
 
 const UserSchema: Schema<IUser> = new Schema({
@@ -67,7 +67,7 @@ const UserSchema: Schema<IUser> = new Schema({
         type: Boolean,
         default: true,
     },
-    message: [messageSchema],
+    messages: [messageSchema],
 })
 
 

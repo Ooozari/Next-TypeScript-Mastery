@@ -64,15 +64,13 @@ export async function POST(request: Request) {
         console.error("Failed to update the accepting status", error);
         return Response.json({
             success: false,
-            message: "Failed to update the accepting status",
+            message: "Error in getting message status",
         }, {
             status: 500,
         })
     }
 
 }
-
-
 
 // Request to see the Message acceptance status
 export async function GET(request: Request) {

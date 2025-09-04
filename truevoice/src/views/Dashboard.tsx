@@ -11,6 +11,7 @@ export default function Dashboard() {
             <button onClick={() => signOut({ callbackUrl: "/sign-in" })}>
                 Sign Out
             </button>
+            
         </div>
     );
 }

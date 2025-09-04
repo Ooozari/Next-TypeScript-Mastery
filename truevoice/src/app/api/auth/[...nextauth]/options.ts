@@ -1,6 +1,6 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcrypt";
+import bcrypt from 'bcryptjs';
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/models/User";
 import { signIn } from "next-auth/react";
@@ -14,8 +14,8 @@ export const authOptions: NextAuthOptions = {
             name: "Credentials",
 
             credentials: {
-                email: { label: "email", type: "text", placeholder: "Enter your email" },
-                password: { label: "Password", type: "password", placeholder: "Enter your password" }
+                identifier: { label: 'Email/Usernmae', type: 'text' },
+                password: { label: 'Password', type: 'password' },
             },
 
             async authorize(credentials: any): Promise<any> {
@@ -84,10 +84,13 @@ export const authOptions: NextAuthOptions = {
         async session({ session, token }) {
             if (token) {
                 // add new properties to tokens
-                session.user._id = token._id?.toString()
-                session.user.username = token.username
-                session.user.isVerified = token.isVerified
-                session.user.isAcceptingMsg = token.isAcceptingMsg
+                session.user = {
+                    ...session.user, // keep email, name, image
+                    _id: token._id?.toString(),
+                    username: token.username,
+                    isVerified: token.isVerified,
+                    isAcceptingMsg: token.isAcceptingMsg,
+                };
             }
             return session
         },

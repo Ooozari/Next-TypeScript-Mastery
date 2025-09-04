@@ -1,7 +1,6 @@
 import { z } from "zod";
 
 export const SignInSchema = z.object({
-// identifier refers to email
-  indentifier: z.string(),
-  passoword: z.string(),
+  identifier: z.string().min(1, "Email/Username is required"),
+  password: z.string().min(6, "Password is required"),
 });

@@ -2,7 +2,7 @@
 
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/models/User";
-import bcrypt from "bcrypt";
+import bcrypt from 'bcryptjs';
 // Helper function to send verification email
 import { sendverificationEmail } from "@/helpers/sendVerificationEmail";
 import { success } from "zod";

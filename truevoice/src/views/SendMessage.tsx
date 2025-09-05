@@ -47,6 +47,7 @@ export default function SendMessage() {
                 const axiosError = error as AxiosError<ApiResponse>
                 const errorMsg = axiosError.response?.data.message || "Failed to check accept message status";
                 toast.error(errorMsg);
+                setIsAcceptingMessages(false)
             }
 
         }

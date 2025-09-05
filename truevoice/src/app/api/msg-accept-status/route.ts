@@ -3,7 +3,7 @@ import UserModel from "@/models/User";
 
 
 // Request to see the Message acceptance status 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
     await dbConnect();
 
 
@@ -24,7 +24,7 @@ export async function GET(request: Request) {
 
         return Response.json({
             success: true,
-            isAcceptingMsg: user.isAcceptingMsg
+            isAcceptingMessages: user.isAcceptingMsg
         }, {
             status: 200
         })

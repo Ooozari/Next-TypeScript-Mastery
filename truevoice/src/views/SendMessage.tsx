@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { cache, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
@@ -25,15 +25,34 @@ import { ApiResponse } from "@/types/ApiResponse";
 
 export default function SendMessage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const router = useRouter();
     const { username } = useParams(); // Extract username from URL (e.g., /u/username)
-    const [isAcceptingMessages, setIsAcceptingMessages] = useState<boolean | null>(false); // null while loading
+    const [isAcceptingMessages, setIsAcceptingMessages] = useState<boolean | null>(null); // null while loading
     const sendMessageForm = useForm<z.infer<typeof MessageSchema>>({
         resolver: zodResolver(MessageSchema),
         defaultValues: {
             content: "",
         },
     });
+
+    // checking the message acceptance status
+    useEffect(() => {
+        const checkStatus = async () => {
+            try {
+                const res = await axios.post('/api/msg-accept-status', { username })
+                if (res.data.success) {
+                    const status = res.data.isAcceptingMessages
+                    setIsAcceptingMessages(status)
+                }
+            } catch (error) {
+                const axiosError = error as AxiosError<ApiResponse>
+                const errorMsg = axiosError.response?.data.message || "Failed to check accept message status";
+                toast.error(errorMsg);
+            }
+
+        }
+        checkStatus()
+    }, [username])
+
 
     const onSubmit = async (data: z.infer<typeof MessageSchema>) => {
         try {

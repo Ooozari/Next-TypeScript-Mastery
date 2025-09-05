@@ -3,11 +3,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
-import { HatGlasses, Send, Loader2 } from "lucide-react";
+import { HatGlasses, Send, Loader2, XCircle, CheckCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {MessageSchema} from '@/schemas/messageSchema'
+import { MessageSchema } from '@/schemas/messageSchema'
 import * as z from "zod";
+import { ScrollArea } from "@/components/ui/scroll-area"
 import {
     Form,
     FormControl,
@@ -26,7 +27,7 @@ export default function SendMessage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const router = useRouter();
     const { username } = useParams(); // Extract username from URL (e.g., /u/username)
-
+    const [isAcceptingMessages, setIsAcceptingMessages] = useState<boolean | null>(false); // null while loading
     const sendMessageForm = useForm<z.infer<typeof MessageSchema>>({
         resolver: zodResolver(MessageSchema),
         defaultValues: {
@@ -60,9 +61,9 @@ export default function SendMessage() {
 
     return (
         <div className="min-h-screen bg-gray-100">
-           
+
             {/* Send Message Section */}
-            <section className="py-20 bg-gradient-to-r from-teal-900 to-teal-700 text-white overflow-hidden relative h-[100vh]">
+            <section className="py-20 bg-gradient-to-r from-teal-900 to-teal-700 text-white overflow-hidden relative min-h-[100vh]">
                 {/* Subtle texture overlay */}
                 <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
 
@@ -74,6 +75,23 @@ export default function SendMessage() {
                             <h1 className="text-5xl font-extrabold tracking-tight leading-tight">
                                 Send Feedback to @{username}
                             </h1>
+                            {/* Status Indicator */}
+                            {isAcceptingMessages === null ? (
+                                <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-4 py-2 w-fit">
+                                    <Loader2 className="h-5 w-5 text-teal-300 animate-spin" />
+                                    <span className="text-sm font-medium">Checking status...</span>
+                                </div>
+                            ) : isAcceptingMessages ? (
+                                <div className="flex items-center space-x-2 bg-teal-500/20 border border-teal-300/50 rounded-lg px-4 py-2 w-fit animate-fade-in">
+                                    <CheckCircle className="h-5 w-5 text-teal-300" />
+                                    <span className="text-sm font-medium">Accepting Messages</span>
+                                </div>
+                            ) : (
+                                <div className="flex items-center space-x-2 bg-red-500/20 border border-red-300/50 rounded-lg px-4 py-2 w-fit animate-fade-in">
+                                    <XCircle className="h-5 w-5 text-red-300" />
+                                    <span className="text-sm font-medium">Not Accepting Messages</span>
+                                </div>
+                            )}
                             <p className="text-lg opacity-90 max-w-md">
                                 Share honest, anonymous feedback to help @{username} grow. Your identity stays hidden—focus on the message.
                             </p>
@@ -96,11 +114,14 @@ export default function SendMessage() {
                                             <FormItem>
                                                 <FormLabel className="text-teal-200">Your Anonymous Message</FormLabel>
                                                 <FormControl>
-                                                    <Textarea
-                                                        {...field}
-                                                        placeholder="Type your feedback here (e.g., 'Great work on the project! Try adding more visuals.')"
-                                                        className="min-h-[150px] rounded-lg bg-white/5 border border-white/30 text-white placeholder-teal-200 focus:border-teal-300 focus:ring-2 focus:ring-teal-200 focus:ring-opacity-50 shadow-sm transition-all duration-300 hover:shadow-md"
-                                                    />
+                                                    <ScrollArea className="max-h-[180px]">
+                                                        <Textarea
+                                                            disabled={isSubmitting || !isAcceptingMessages}
+                                                            {...field}
+                                                            placeholder="Type your feedback here (e.g., 'Great work on the project! Try adding more visuals.')"
+                                                            className="min-h-[150px] rounded-lg bg-white/5 border border-white/30 text-white placeholder-teal-200 focus:border-teal-300 focus:ring-2 focus:ring-teal-200 focus:ring-opacity-50 shadow-sm transition-all duration-300 hover:shadow-md "
+                                                        />
+                                                    </ScrollArea>
                                                 </FormControl>
                                                 <FormMessage className="text-red-300" />
                                             </FormItem>
@@ -108,7 +129,7 @@ export default function SendMessage() {
                                     />
                                     <Button
                                         type="submit"
-                                        disabled={isSubmitting}
+                                        disabled={isSubmitting || !isAcceptingMessages}
                                         className="w-full bg-teal-500 hover:bg-teal-400 text-white font-semibold py-3 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 disabled:opacity-50"
                                     >
                                         {isSubmitting ? (

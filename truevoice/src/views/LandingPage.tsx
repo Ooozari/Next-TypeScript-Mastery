@@ -71,9 +71,6 @@ export default function LandingPage() {
         } finally {
             setIsSubmitting(false);
         }
-
-
-
     };
 
     return (

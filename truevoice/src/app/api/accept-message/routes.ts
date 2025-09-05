@@ -72,9 +72,8 @@ export async function POST(request: Request) {
 
 }
 
-// Request to see the Message acceptance status
+// Request to see the Message acceptance status 
 export async function GET(request: Request) {
-
     await dbConnect();
     // STEP 1:
     // Grabbing User from Session
@@ -86,7 +85,6 @@ export async function GET(request: Request) {
             { status: 401 }
         );
     }
-
     try {
 
         //STEP 2: Getting user

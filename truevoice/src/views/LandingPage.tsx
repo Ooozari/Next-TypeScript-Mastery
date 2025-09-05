@@ -53,7 +53,6 @@ export default function LandingPage() {
             const url = new URL(searchProfile);
             const parts = url.pathname.split("/");
             username = parts[parts.length - 1];
-            console.log("THis is username", username)
         }
         try {
             setIsSubmitting(true);
@@ -261,11 +260,6 @@ export default function LandingPage() {
                     </div>
                 </div>
             </section>
-
-            {/* Footer */}
-            <footer className="py-8 bg-gray-800 text-white text-center">
-                <h2 className="text-3xl font-bold mb-4">Ready to Hear the Truth?</h2>
-            </footer>
         </div>
     );
 }

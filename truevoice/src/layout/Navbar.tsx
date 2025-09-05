@@ -5,7 +5,7 @@ import { Button } from '../components/ui/button';
 import { useSession, signOut } from 'next-auth/react';
 import { User } from 'next-auth'
 import toast from "react-hot-toast";
-import { Menu, X } from 'lucide-react';
+import { HatGlasses, Menu, X } from 'lucide-react';
 function Navbar() {
     const { data: session } = useSession()
     const user: User = session?.user as User
@@ -19,9 +19,11 @@ function Navbar() {
         <>
             <div className='fixed top-2 flex justify-center items-center mx-2 w-full z-90'>
                 <div className='relative flex justify-center items-center md:max-w-xl w-full  flex-col'>
-                    <nav className={`flex md:max-w-xl w-full justify-between bg-gray-100 py-3 px-5 md:py-5 md:px-10  ${openMobileMenu ? 'rounded-t-4xl ' : 'rounded-4xl '} items-center`}>
-                        <div className='text-2xl font-bold text-teal-500'>
-                            <Link href='/'>True Voice</Link>
+                    <nav className={`flex md:max-w-xl w-full justify-between bg-gradient-to-b from-teal-900 to-teal-700 text-white py-3 px-5 md:py-5 md:px-10  ${openMobileMenu ? 'rounded-t-4xl ' : 'rounded-4xl '} items-center`}>
+
+                        <div className='text-2xl font-bold'>
+                            <Link href='/' className='flex gap-2'><HatGlasses className="h-8 w-8 text-teal-300 animate-pulse" />
+                                <h1 className="text-2xl font-bold">True Voice</h1></Link>
                         </div>
 
                         <div className='md:flex hidden items-center gap-2 '>

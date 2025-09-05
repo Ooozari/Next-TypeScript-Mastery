@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/form"
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
-import { Loader2 } from 'lucide-react'
+import { Loader2, Mail, Lock, Eye } from 'lucide-react'
 import { SignInSchema } from '@/schemas/signInSchema';
 import { signIn } from 'next-auth/react';
 
@@ -56,7 +56,7 @@ export default function Signin() {
 
         if (result?.url) {
             toast.success("Signed in successfully!");
-             router.replace("/dashboard");
+            router.replace("/dashboard");
         }
     };
 
@@ -66,10 +66,10 @@ export default function Signin() {
             <div className="flex justify-center items-center min-h-screen bg-gray-800">
                 <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
                     <div className="text-center">
-                        <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
-                            Join True Voice
+                        <h1 className="text-xl font-extrabold tracking-tight lg:text-3xl mb-6">
+                            Unlock Anonymous Insights
                         </h1>
-                        <p className="mb-4">Sign in to start your anonymous adventure</p>
+                        <p className="mb-4">Share honest feedback without revealing your identity</p>
                     </div>
 
                     <Form {...signInForm}>
@@ -107,11 +107,10 @@ export default function Signin() {
                                     </FormItem>
                                 )}
                             />
-                            <Button type="submit" className='w-full'>
+                            <Button type="submit" className="w-full bg-teal-500 hover:bg-teal-600 text-white rounded-md py-3 transition-transform hover:scale-105">
                                 {
                                     isSubmitting ? (
                                         <>
-
                                             <Loader2 className='animate-spin mr-2' /> <span>Signing in...</span>
                                         </>
                                     ) : ('Sign in')

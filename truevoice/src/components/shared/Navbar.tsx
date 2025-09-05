@@ -17,10 +17,10 @@ function Navbar() {
 
     return (
         <>
-            <div className='sticky top-2 flex justify-center items-center mx-2'>
+            <div className='fixed top-2 flex justify-center items-center mx-2 w-full z-90'>
                 <div className='relative flex justify-center items-center md:max-w-xl w-full  flex-col'>
                     <nav className={`flex md:max-w-xl w-full justify-between bg-gray-100 py-3 px-5 md:py-5 md:px-10  ${openMobileMenu ? 'rounded-t-4xl ' : 'rounded-4xl '} items-center`}>
-                        <div>
+                        <div className='text-2xl font-bold text-teal-500'>
                             <Link href='/'>True Voice</Link>
                         </div>
 

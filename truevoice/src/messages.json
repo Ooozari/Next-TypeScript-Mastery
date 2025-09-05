@@ -1,0 +1,32 @@
+[
+  {
+    "username": "User123",
+    "content": "I think the new update is confusing. Some buttons don’t work as expected and it’s hard to navigate through the menus quickly.",
+    "received": "2 minutes ago"
+  },
+  {
+    "username": "Anon567",
+    "content": "Could you add a dark mode? My eyes hurt when using the app at night, and a dark theme would make it much more comfortable.",
+    "received": "10 minutes ago"
+  },
+  {
+    "username": "HiddenOne",
+    "content": "Sometimes the app crashes randomly, especially when I try to upload a file or switch between sections, which can be really frustrating.",
+    "received": "30 minutes ago"
+  },
+  {
+    "username": "SecretFan",
+    "content": "Love the idea but the notifications are annoying. They pop up too often and sometimes cover the content I’m trying to read.",
+    "received": "1 hour ago"
+  },
+  {
+    "username": "GhostUser",
+    "content": "Please allow more character limit in messages. I often run out of space when trying to explain my thoughts completely, which is annoying.",
+    "received": "Yesterday"
+  },
+  {
+    "username": "Incognito",
+    "content": "The signup process could be faster. Waiting for confirmation emails or extra steps slows everything down and can be discouraging.",
+    "received": "2 days ago"
+  }
+]

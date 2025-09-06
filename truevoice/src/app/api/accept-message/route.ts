@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     //STEP 2: FLAG & ID
     const userId = user._id;
     // Getting from user while hitting this api 
-    const { acceptMessage } = await request.json()
+    const { acceptMessages } = await request.json()
 
     //STEP 3: TRY/CATCH
     try {
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
             userId,
             //update to
             {
-                isAcceptingMsg: acceptMessage
+                isAcceptingMsg: acceptMessages
             },
             // Retuning the updated doc after the update
             { new: true }
@@ -53,7 +53,7 @@ export async function POST(request: Request) {
         //Message acceptance status has been updated
         return Response.json({
             success: true,
-            message: "Message acceptance status updated successfully",
+            message: "Status updated!",
             updated,
         }, {
             status: 200
@@ -61,10 +61,10 @@ export async function POST(request: Request) {
 
 
     } catch (error) {
-        console.error("Failed to update the accepting status", error);
+        console.error("Failed to update message acceptance status", error);
         return Response.json({
             success: false,
-            message: "Error in getting message status",
+            message: "Failed to update message acceptance status",
         }, {
             status: 500,
         })

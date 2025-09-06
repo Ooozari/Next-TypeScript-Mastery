@@ -6,7 +6,7 @@ export default function Footer() {
     return (
         <>
             {/* Footer */}
-            <footer className="py-8 bg-gray-800 text-white text-center">
+            <footer className="py-8 bg-gradient-to-b from-gray-900 to-teal-800 text-white text-center">
                 <h2 className="text-3xl font-bold mb-4">Ready to Hear Your Truth?</h2>
                 <div className="space-x-4 mb-4">
                     <Button asChild>

@@ -16,7 +16,6 @@ import {
     FormControl,
     FormField,
     FormItem,
-    FormLabel,
     FormMessage,
 } from "@/components/ui/form"
 import { useRouter } from 'next/navigation';
@@ -56,7 +55,7 @@ export default function LandingPage() {
         }
         try {
             setIsSubmitting(true);
-            const res = await axios.post('/api/check-user-exist', { username })
+            const res = await axios.post<ApiResponse>('/api/check-user-exist', { username })
             if (res.data.success) {
                 router.replace(`/u/${username}`)
             } else {

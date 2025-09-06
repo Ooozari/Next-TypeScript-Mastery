@@ -1,5 +1,5 @@
 "use client";
-import { cache, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
@@ -17,7 +17,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { useRouter, useParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import toast from "react-hot-toast";
 import axios, { AxiosError } from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
@@ -38,10 +38,10 @@ export default function SendMessage() {
     useEffect(() => {
         const checkStatus = async () => {
             try {
-                const res = await axios.post('/api/msg-accept-status', { username })
+                const res = await axios.post<ApiResponse>('/api/msg-accept-status', { username })
                 if (res.data.success) {
                     const status = res.data.isAcceptingMessages
-                    setIsAcceptingMessages(status)
+                    setIsAcceptingMessages(status as boolean)
                 }
             } catch (error) {
                 const axiosError = error as AxiosError<ApiResponse>

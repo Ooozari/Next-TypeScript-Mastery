@@ -2,38 +2,70 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
-import { HatGlasses, Copy, EyeOff, Settings, LogOut, LayoutDashboard, LockOpen, Trash2 } from "lucide-react";
+import { HatGlasses, Copy, EyeOff, Settings, LogOut, LayoutDashboard, LockOpen, Gem ,Trash2, WalletCards } from "lucide-react";
+import * as z from 'zod';
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useSession, signOut } from "next-auth/react"
+import { Imessage } from "@/models/User";
+import axios, { AxiosError } from "axios";
+import { useForm } from "react-hook-form";
+import { AcceptMessageSchema } from "@/schemas/acceptMessageSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ApiResponse } from "@/types/ApiResponse";
 
 
 export default function Dashboard() {
-    // Placeholder username and messages (replace with real data)
-    const username = "john_doe"; // Example username
+
+    const { data: session } = useSession();
+    const username = session?.user.username
+    const status = session?.user.isAcceptingMsg
+    const [message, setMessages] = useState<Imessage[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isSwitchLoading, setIsSwitchLoading] = useState(false);
+    const [messageStatus, setMessageSatus] = useState(status)
+
+
+
     const messages = [
         { id: 1, content: "Great work on the project! Try adding more visuals.", received: "2 days ago" },
         { id: 2, content: "You're a great listener—keep it up!", received: "1 week ago" },
         { id: 3, content: "Loved the team outing idea. More like that!", received: "3 days ago" },
     ];
 
+    // Form + Zod Validations
+    const form = useForm<z.infer<typeof AcceptMessageSchema>>({
+        resolver: zodResolver(AcceptMessageSchema)
+    })
+    const {register, watch, setValue} = form;
+    const acceptMessages = watch('acceptMessages')
+
+
+    // Check user Accept Message status
+    const fetchAcceptMessage = useCallback(async() => {
+        setIsSwitchLoading(true);
+        try {
+            //get request to check accept message status
+            const res = await axios.post<ApiResponse>('/api/accept-message')
+            setValue('acceptMessages', res.data.isAcceptingMsg)
+        } catch (error) {
+            const axiosError = error as AxiosError<ApiResponse>;
+            toast.error(axiosError.response?.data.message || "Failed to fetch message acceptance status")
+        }finally{
+              setIsSwitchLoading(false);
+        }
+    },[setValue])
+
+    // Copy to clipboard Funtionalities
     const [profileLink, setProfileLink] = useState<string | null>(null);
-
-    
-
-
     const generateProfileLink = () => {
-        const domain = window.location.origin; 
-// e.g. "http://localhost:3000" or "https://example.com"
-
+        const domain = window.location.origin;
         setProfileLink(`${domain}/u/${username}`);
     };
-    useEffect(() => { 
+    useEffect(() => {
         generateProfileLink();
-
-     }, [profileLink])
-
-
+    }, [profileLink])
     const handleCopy = () => {
         navigator.clipboard.writeText(profileLink as string);
         toast.success("Profile link copied!")
@@ -62,7 +94,7 @@ export default function Dashboard() {
                 {/* Header */}
                 <header className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 mb-8 shadow-2xl">
                     <div className="flex justify-between items-center">
-                        <h1 className="text-3xl font-extrabold text-gray-900">Welcome, @{username}</h1>
+                        <h1 className="text-3xl font-extrabold text-gray-900">Welcome, {username}</h1>
                         <Button variant="outline" className="flex items-center space-x-2 text-teal-200 hover:text-white transition-colors">
                             <LogOut className="h-5 w-5" />
                             <span>Log Out</span>
@@ -93,7 +125,7 @@ export default function Dashboard() {
                                         Accept Anonymous Messages
                                     </label>
                                 </div>
-                                <span className="text-xs text-teal-300/60">Currently: On</span>
+                                <span className="text-xs text-teal-300/60">Currently:     {messageStatus? " On" : " Off"}</span>
                             </div>
 
                             {/* Copy URL */}
@@ -150,7 +182,7 @@ export default function Dashboard() {
                     {/* Subtle overlay for depth */}
                     <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
                     <div className="flex justify-center items-center gap-2 mb-4">
-                        <HatGlasses className="w-10 h-10 text-teal-300 animate-pulse" />
+                        <Gem  className="w-10 h-10 text-teal-300 animate-pulse" />
                         <h2 className="text-4xl font-extrabold tracking-tight flex justify-center items-center">Premium Features</h2>
                     </div>
                     <p className="text-lg opacity-90 max-w-md mx-auto mb-6">

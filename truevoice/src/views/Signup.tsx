@@ -53,7 +53,7 @@ export default function Signup() {
 
                 try {
                     //TODO: LOG THIS RESPONSE
-                    const response = await axios.get(`/api/unique-username?username=${username}`)
+                    const response = await axios.get<ApiResponse>(`/api/unique-username?username=${username}`)
 
                     // setting the username message according to the reponse from the api
                     setUsernameMsg(response.data.message)

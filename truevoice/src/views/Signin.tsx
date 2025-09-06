@@ -2,7 +2,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";

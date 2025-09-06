@@ -2,7 +2,7 @@
 import { VerifySchema } from '@/schemas/verifySchema'
 import { useParams, useRouter } from 'next/navigation'
 import React from 'react';
-import { Message, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import axios, { AxiosError } from 'axios'
 import { useState } from 'react';
@@ -38,7 +38,7 @@ export default function Verify() {
 
         try {
             setIsVerifying(true)
-            const res = await axios.post('/api/verify-code', {
+            const res = await axios.post<ApiResponse>('/api/verify-code', {
                 username: params.username,
                 code: data.code,
             })

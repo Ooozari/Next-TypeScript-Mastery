@@ -7,7 +7,7 @@ import { Heading, Paragraph } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { ArrowRight, ArrowLeft, HatGlasses, Search, EyeOff, Loader2 } from "lucide-react";
+import { ArrowRight, ArrowLeft, HatGlasses, Search, Loader2 } from "lucide-react";
 import Messages from "../messages.json";
 import type { Swiper as SwiperType } from "swiper";
 import { searchUserProfileSchema } from '@/schemas/searchUserProfile'

@@ -10,10 +10,14 @@ export default function Footer() {
                 <h2 className="text-3xl font-bold mb-4">Ready to Hear Your Truth?</h2>
                 <div className="space-x-4 mb-4">
                     <Button asChild>
-                        <Link href="/sign-up">Sign Up</Link>
+                        <Link href="/sign-up" className="bg-teal-500 hover:bg-teal-400 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105">
+                            Sign Up
+                        </Link>
                     </Button>
-                    <Button asChild variant="outline" className="text-white border-white hover:bg-white hover:text-gray-800">
-                        <Link href="/sign-in">Log In</Link>
+                    <Button asChild variant="outline">
+                        <Link href="/sign-in" className="text-teal-200 border-teal-300/50 hover:bg-teal-500 hover:text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-lg">
+                            Log In
+                        </Link>
                     </Button>
                 </div>
                 <div className="text-sm">

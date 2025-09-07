@@ -1,15 +1,16 @@
-import {Footer, Navbar} from '@/layout'
+'use client';
+import { Footer, Navbar } from '@/layout'
+import { usePathname } from 'next/navigation'
 
-interface RootLayoutProps {
-  children: React.ReactNode;
-}
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname()
+  const isDashboard = pathname.startsWith('/dashboard')
 
-export default async function RootLayout({ children }: RootLayoutProps) {
   return (
-    <div className="flex flex-col min-h-screen" >
-      {/* <Navbar /> */}
+    <div className="flex flex-col min-h-screen">
+      {!isDashboard && <Navbar />}
       {children}
       <Footer />
     </div>
-  );
+  )
 }

@@ -106,7 +106,6 @@ export default function Dashboard() {
     };
 
     // Delete Message End Point
-
     const handleDeleteConfirm = async (messageId: string) => {
         try {
             const res = await axios.delete(`/api/delete-message/${messageId}`);

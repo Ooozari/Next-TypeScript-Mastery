@@ -152,6 +152,7 @@ export default function Dashboard() {
                         </div>
                         <Button
                             variant="outline"
+                            onClick={()=>signOut()}
                             className="flex items-center space-x-2 bg-white/10 border-teal-300/50 text-teal-200 hover:bg-teal-500 hover:text-white transition-all duration-300 hover:shadow-lg"
                         >
                             <LogOut className="h-5 w-5" />

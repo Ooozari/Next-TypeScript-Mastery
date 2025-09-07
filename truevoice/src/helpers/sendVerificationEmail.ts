@@ -1,31 +1,34 @@
-import { resend } from "@/lib/resend";
-import VerificationEmail from "../../emails/VerificationEmail";
-import { ApiResponse } from "@/types/ApiResponse";
 
-export async function sendverificationEmail(
+import { transporter } from "@/lib/mailer";
+import { ApiResponse } from "@/types/ApiResponse";
+import VerificationEmail from "../../emails/VerificationEmail";
+import { render } from "@react-email/render";
+
+export async function sendVerificationEmail(
   email: string,
   username: string,
   verifyCode: string
 ): Promise<ApiResponse> {
-    console.log("Failed to send verification email to:", email);
   try {
-    const { data, error } = await resend.emails.send({
-      from: 'Acme <onboarding@resend.dev>',  // keep this domain for testing
+    // Convert React component → HTML (await required)
+    const emailHtml = await render(
+      VerificationEmail({ username, otp: verifyCode })
+    );
+
+    const mailOptions = {
+      from: `"True Voice" <${process.env.GMAIL_USER}>`,
       to: String(email).trim(),
       subject: "TRUE VOICE | Verification Code",
-      react: VerificationEmail({ username, otp: verifyCode }),
-    });
+      html: emailHtml,
+    };
 
-    if (error) {
-      console.error("Resend Error:", error);
-      return { success: false, message: "Failed to send verification email" };
-    }
-            
+    const info = await transporter.sendMail(mailOptions);
 
-    console.log("Resend Success:", data);
+  
     return { success: true, message: "Verification email sent successfully" };
-  } catch (err) {
-    console.error("Unexpected Error:", err);
-    return { success: false, message: "Server error sending verification email" };
+  } catch (error: any) {
+    console.error("Nodemailer Error:", error);
+    return { success: false, message: "Failed to send verification email" };
   }
 }
+

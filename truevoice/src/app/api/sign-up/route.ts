@@ -4,7 +4,7 @@ import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/models/User";
 import bcrypt from 'bcryptjs';
 // Helper function to send verification email
-import { sendverificationEmail } from "@/helpers/sendVerificationEmail";
+import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
 import { success } from "zod";
 
 
@@ -93,7 +93,7 @@ export async function POST(request: Request) {
         }
 
         // sending verification email is user can be created 
-        const emailResponse = await sendverificationEmail(
+        const emailResponse = await sendVerificationEmail(
             email,
             username,
             OTP,

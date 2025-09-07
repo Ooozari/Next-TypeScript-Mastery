@@ -6,7 +6,7 @@ import "swiper/css";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { ArrowRight, ArrowLeft, HatGlasses, Search, EyeOff,Loader2 } from "lucide-react";
+import { ArrowRight, ArrowLeft, HatGlasses, Search, EyeOff, Loader2 } from "lucide-react";
 import Messages from "../messages.json";
 import type { Swiper as SwiperType } from "swiper";
 import { searchUserProfileSchema } from '@/schemas/searchUserProfile'
@@ -61,7 +61,7 @@ export default function LandingPage() {
             } else {
                 toast.error(res.data.message)
             }
-            
+
 
         } catch (error) {
             const axiosError = error as AxiosError<ApiResponse>
@@ -84,18 +84,21 @@ export default function LandingPage() {
                         True Voice lets you send and receive anonymous feedback from friends, colleagues, or anyone—no judgments, just insights.
                     </p>
                     <div className="space-x-4 flex justify-center">
+
                         <Link href="/sign-up">
-                            <Button variant="default" className="bg-teal-500 hover:bg-teal-600">Sign Up Free</Button>
+                            <Button 
+                            variant="attractive"
+                            className="py-3 px-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                                Sign Up Free
+                            </Button>
                         </Link>
                         <Link href="#quick-send">
                             <Button
-                                variant="outline"
-                                className="text-teal-500 border-teal-500 hover:bg-teal-500 hover:text-white group flex gap-1 items-center"
+                                variant="glassy"
+                                className="py-3 px-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 group flex gap-2 items-center"
                             >
                                 <span>Start Sending Now</span>
-                                <ArrowRight
-                                    className="w-5 h-5 flex items-center"
-                                />
+                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                             </Button>
                         </Link>
                     </div>
@@ -158,11 +161,6 @@ export default function LandingPage() {
                                             : "bg-white/5 backdrop-blur-sm border border-teal-900/30 shadow-sm"
                                             } rounded-xl p-6 w-full max-w-sm relative overflow-hidden transition-all duration-300  hover:scale-105 animate-fade-in`}
                                     >
-                                        {/* Username */}
-                                        <div className="flex justify-end font-semibold text-sm text-teal-200 mb-2">
-                                            {message.username}
-                                        </div>
-
                                         {/* Message Content */}
                                         <div className={`text-start line-clamp-3  ${currentSlideIndex === index ? 'text-black' : 'text-gray-600'} font-medium italic leading-relaxed`}>
                                             "{message.content}"
@@ -180,9 +178,6 @@ export default function LandingPage() {
                             ))}
                         </Swiper>
                     </div>
-                    <Button asChild className="mt-8 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 rounded-lg">
-                        <Link href="/sign-up">Ready to Receive Yours? Sign Up</Link>
-                    </Button>
                 </div>
             </section>
 

@@ -124,7 +124,7 @@ export default function Dashboard() {
     //     return <div>Please login to continue</div>
     // }
     return (
-        <div className="min-h-screen bg-gray-100 flex">
+        <div className="min-h-screen bg-gray-100">
             {/* Sidebar */}
             {/* <aside className="w-64 bg-gradient-to-b from-teal-900 to-teal-700 text-white p-6 hidden md:block">
                 <div className="flex items-center space-x-2 mb-8">
@@ -141,7 +141,7 @@ export default function Dashboard() {
             </aside> */}
 
             {/* Main Content */}
-            <main className="flex-1 p-6">
+            <main className="p-4 md:p-6">
                 {/* Header */}
                 <header className="bg-gradient-to-r from-gray-900 to-teal-800 text-white rounded-2xl p-8 mb-8 shadow-2xl relative overflow-hidden animate-fade-in">
                     <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
@@ -151,9 +151,9 @@ export default function Dashboard() {
                             <h1 className="text-4xl font-extrabold tracking-tight">Welcome, @{username}</h1>
                         </div>
                         <Button
-                            variant="outline"
-                            onClick={()=>signOut()}
-                            className="flex items-center space-x-2 bg-white/10 border-teal-300/50 text-teal-200 hover:bg-teal-500 hover:text-white transition-all duration-300 hover:shadow-lg"
+                            variant="glassy"
+                            onClick={() => signOut()}
+                            className="flex items-center space-x-2 transition-all duration-300 hover:shadow-lg"
                         >
                             <LogOut className="h-5 w-5" />
                             <span>Log Out</span>
@@ -167,7 +167,6 @@ export default function Dashboard() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* Left: Profile Info */}
                         <div className="space-y-6">
-                            <HatGlasses className="h-16 w-16 text-teal-300 animate-pulse" />
                             <h2 className="text-4xl font-extrabold tracking-tight">Your Feedback Hub</h2>
                             <p className="text-lg opacity-90 max-w-md">
                                 Manage your anonymous feedback and share your profile to get more insights.
@@ -204,7 +203,7 @@ export default function Dashboard() {
                                     />
                                     <Button
                                         onClick={handleCopy}
-                                        className="bg-teal-500 hover:bg-teal-400 text-white shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105"
+                                        className="shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105"
                                     >
                                         <Copy className="h-5 w-5" />
                                     </Button>
@@ -216,20 +215,22 @@ export default function Dashboard() {
 
                 {/* Received Messages */}
                 <section className="mb-8">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-6">Your Received Messages</h2>
+                    <div className="flex justify-between md:flex-row flex-col mb-6 items-center" >
+                        <h2 className="text-3xl font-bold text-gray-900 ">Your Received Messages</h2>
+                        <Button
+                        className="self-end"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                fetchMessages(true);
+                            }}>
+                            <RefreshCw
 
-                    <Button
-                        variant='ghost'
-                        onClick={(e) => {
-                            e.preventDefault();
-                            fetchMessages(true);
-                        }}>
-                        <RefreshCw
+                                className={`w-5 h-5 cursor-pointer transition-transform ${isLoading ? "animate-spin" : ""
+                                    }`}
+                            />
+                        </Button>
+                    </div>
 
-                            className={`w-5 h-5 cursor-pointer transition-transform ${isLoading ? "animate-spin" : ""
-                                }`}
-                        />
-                    </Button>
                     {messages.length === 0 ? (
                         <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 text-center text-gray-600">
                             <p>No messages yet. Share your profile link to start receiving feedback!</p>
@@ -264,7 +265,7 @@ export default function Dashboard() {
                 </section>
 
                 {/* CTA: Upgrade or Settings */}
-                <section className="bg-gradient-to-r from-teal-900 to-teal-700 text-white rounded-2xl p-8 text-center shadow-2xl relative overflow-hidden">
+                <section className="bg-gradient-to-r from-teal-900 to-teal-700 text-white rounded-2xl p-8 text-center shadow-2xl relative">
                     {/* Subtle overlay for depth */}
                     <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
                     <div className="flex justify-center items-center gap-2 mb-4">
@@ -276,11 +277,11 @@ export default function Dashboard() {
                     </p>
                     <div className="flex justify-center items-center gap-4">
 
-                        <Button className=" hover:bg-white/15 transition-all duration-300 hover:scale-105 bg-white/10 backdrop-blur-md border border-teal-200/50 text-teal-200 text-sm font-semibold rounded-full shadow-sm animate-pulse px-4 py-1.5">
+                        <Button
+                            variant='dummy'
+                            className=" ">
                             Coming Soon
-                            {/* <span className="bg-white/10 backdrop-blur-md border border-teal-200/50 text-teal-200 text-sm font-semibold rounded-full px-2 py-1 shadow-sm animate-pulse">
-                               
-                            </span> */}
+
                         </Button>
                     </div>
                 </section>

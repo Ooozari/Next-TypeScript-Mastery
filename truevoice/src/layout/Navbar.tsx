@@ -33,13 +33,15 @@ function Navbar() {
                         </div>
 
                         <div className="md:flex hidden items-center gap-4">
-                            <div>
-                                {session ? (
-                                    <span className="text-teal-200 font-medium">@{user?.username}</span>
-                                ) : (
-                                    ""
-                                )}
-                            </div>
+                            <Link href="/" className="text-teal-200 font-medium hover:text-white transition-colors">
+                                Home
+                            </Link>
+                            {session && (
+                                <Link href="/dashboard" className="text-teal-200 font-medium hover:text-white transition-colors">
+                                    Dashboard
+                                </Link>
+                            )}
+                            
                             <div>
                                 {session ? (
                                     <Button
@@ -53,7 +55,7 @@ function Navbar() {
                                     </Button>
                                 ) : (
                                     <Link href="/sign-in">
-                                        <Button className="bg-white/10 border-teal-300/50 text-teal-200 hover:bg-teal-500 hover:text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 hover:shadow-lg">
+                                        <Button className="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105">
                                             Login
                                         </Button>
                                     </Link>
@@ -72,11 +74,19 @@ function Navbar() {
                         </div>
                     </nav>
                     <div
-                        className={`bg-gradient-to-b from-gray-900 to-teal-800 text-white px-5 py-5 absolute top-full left-0 rounded-b-4xl w-full shadow-lg border-b border-teal-300/20
+                        className={`bg-gradient-to-t from-gray-900 to-teal-800 text-white px-5 py-5 absolute top-full left-0 rounded-b-4xl w-full shadow-lg border-b border-teal-300/20
                         overflow-hidden transform transition-all duration-500 ease-in-out
-                        ${openMobileMenu ? "opacity-100 scale-y-100 max-h-40" : "opacity-0 scale-y-0 max-h-0 origin-top"}`}
+                        ${openMobileMenu ? "opacity-100 scale-y-100 max-h-60" : "opacity-0 scale-y-0 max-h-0 origin-top"}`}
                     >
                         <div className="flex flex-col gap-5 items-center">
+                            <Link href="/" className="text-teal-200 font-medium hover:text-white transition-colors">
+                                Home
+                            </Link>
+                            {session && (
+                                <Link href="/dashboard" className="text-teal-200 font-medium hover:text-white transition-colors">
+                                    Dashboard
+                                </Link>
+                            )}
                             <div>
                                 {session ? (
                                     <span className="text-teal-200 font-medium">Hello, @{user?.username}</span>
@@ -97,7 +107,7 @@ function Navbar() {
                                     </Button>
                                 ) : (
                                     <Link href="/sign-in">
-                                        <Button className="bg-white/10 border-teal-300/50 text-teal-200 hover:bg-teal-500 hover:text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 hover:shadow-lg">
+                                        <Button className="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105">
                                             Login
                                         </Button>
                                     </Link>

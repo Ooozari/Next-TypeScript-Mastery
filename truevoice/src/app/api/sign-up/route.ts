@@ -5,7 +5,7 @@ import UserModel from "@/models/User";
 import bcrypt from 'bcryptjs';
 // Helper function to send verification email
 import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
-import { success } from "zod";
+
 
 
 

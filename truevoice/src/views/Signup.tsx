@@ -9,7 +9,7 @@ import { useDebounceCallback } from 'usehooks-ts'
 import { useRouter } from 'next/navigation';
 import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SignUpValidation } from '@/schemas/signUpSchema';
+import { SignUpValidation } from "@/schemas/signUpSchema";
 import { ApiResponse } from '@/types/ApiResponse';
 import { Button } from "@/components/ui/button"
 import {
@@ -120,7 +120,7 @@ export default function Signup() {
                                             {...field}
                                             onChange={(e) => {
                                                 field.onChange(e);
-                                                debounced(e.target.value); // update username for redirect
+                                                debounced(e.target.value);
                                                 setUsernameMsg(e.target.value ? "Username is unique" : "");
                                             }}
 

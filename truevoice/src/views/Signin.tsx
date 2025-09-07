@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/form"
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
-import { Loader2, Mail, Lock, Eye, HatGlasses } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
 import { SignInSchema } from '@/schemas/signInSchema';
 import { signIn } from 'next-auth/react';
 

@@ -93,35 +93,33 @@ export default function SendMessage() {
                         {/* Left: User Info */}
                         <div className="space-y-6">
                             <HatGlasses className="h-20 w-20 text-teal-300 mb-4 animate-pulse" />
-                            <h1 className="text-5xl font-extrabold tracking-tight leading-tight">
-                                Send Feedback to @{username}
-                            </h1>
+                            <Heading level="sectionheadingmd" className="font-extrabold tracking-tight leading-tight">Send Feedback to @{username}</Heading>
+
                             {/* Status Indicator */}
                             {isAcceptingMessages === null ? (
                                 <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-4 py-2 w-fit">
                                     <Loader2 className="h-5 w-5 text-teal-300 animate-spin" />
-                                    <span className="text-sm font-medium">Checking status...</span>
+                                    <Paragraph size="normal" className="font-medium">Checking status...</Paragraph>
                                 </div>
                             ) : isAcceptingMessages ? (
                                 <div className="flex items-center space-x-2 bg-teal-500/20 border border-teal-300/50 rounded-lg px-4 py-2 w-fit animate-fade-in">
                                     <CheckCircle className="h-5 w-5 text-teal-300" />
-                                    <span className="text-sm font-medium">Accepting Messages</span>
+                                    <Paragraph size="normal" className="font-medium">Accepting Messages</Paragraph>
+
                                 </div>
                             ) : (
                                 <div className="flex items-center space-x-2 bg-red-500/20 border border-red-300/50 rounded-lg px-4 py-2 w-fit animate-fade-in">
                                     <XCircle className="h-5 w-5 text-red-300" />
-                                    <span className="text-sm font-medium">Not Accepting Messages</span>
+                                    <Paragraph size="normal" className="font-medium">Not Accepting Messages</Paragraph>
                                 </div>
                             )}
-                            <p className="text-lg opacity-90 max-w-md">
-                                Share honest, anonymous feedback to help @{username} grow. Your identity stays hidden—focus on the message.
-                            </p>
-                            <p className="text-sm opacity-80">
+                            <Paragraph size="xl" className="opacity-90 max-w-md">Share honest, anonymous feedback to help @{username} grow. Your identity stays hidden—focus on the message.</Paragraph>
+                            <Paragraph size="normal" className="opacity-80">
                                 Want to receive feedback too?{' '}
                                 <Link href="/sign-up" className="text-teal-300 font-medium hover:text-white transition-colors">
                                     Create Your Profile
                                 </Link>
-                            </p>
+                            </Paragraph>
                         </div>
 
                         {/* Right: Message Form */}
@@ -140,7 +138,7 @@ export default function SendMessage() {
                                                             disabled={isSubmitting || !isAcceptingMessages}
                                                             {...field}
                                                             placeholder="Type your feedback here (e.g., 'Great work on the project! Try adding more visuals.')"
-                                                            className="min-h-[150px] rounded-lg bg-white/5 border border-white/30 text-white placeholder-teal-200 focus:border-teal-300 focus:ring-2 focus:ring-teal-200 focus:ring-opacity-50 shadow-sm transition-all duration-300 hover:shadow-md "
+                                                            className="min-h-[150px]"
                                                         />
                                                     </ScrollArea>
                                                 </FormControl>
@@ -151,7 +149,7 @@ export default function SendMessage() {
                                     <Button
                                         type="submit"
                                         disabled={isSubmitting || !isAcceptingMessages}
-                                        className="w-full bg-teal-500 hover:bg-teal-400 text-white font-semibold py-3 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 disabled:opacity-50"
+                                        className="w-full font-semibold py-3 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 disabled:opacity-50"
                                     >
                                         {isSubmitting ? (
                                             <>

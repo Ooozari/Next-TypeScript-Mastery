@@ -1,6 +1,6 @@
 import { Trash2 } from "lucide-react";
 import { Imessage } from "@/models/User";
-import { Heading, Paragraph } from "@/components/ui/typography";
+import { Paragraph } from "@/components/ui/typography";
 
 interface MessageCardProps {
     message: Imessage;

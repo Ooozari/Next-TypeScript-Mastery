@@ -4,13 +4,11 @@ import Link from "next/link";
 import { Heading } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
 import { useSession, signOut } from "next-auth/react";
-import { User } from "next-auth";
 import toast from "react-hot-toast";
 import { HatGlasses, Menu, X } from "lucide-react";
 
 function Navbar() {
     const { data: session } = useSession();
-    const user: User = session?.user as User;
     const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
     const handleOpenMobileMenu = () => {

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Geist_Mono } from "next/font/google"; // use Poppins instead of Inter
+import { Poppins, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "./context/AuthProvider";
 import { Toaster } from "react-hot-toast";
@@ -8,10 +8,10 @@ import { Toaster } from "react-hot-toast";
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"], // include the weights you need
+  weight: ["300", "400", "500", "600", "700", "800"], 
 });
 
-// Keep Geist Mono if you still want monospace
+
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],

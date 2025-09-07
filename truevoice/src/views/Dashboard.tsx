@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { HatGlasses, Copy, LogOut, Gem, Trash2, RefreshCw } from "lucide-react";
+import { MessageCard } from '@/components/shared'
+import { Heading, Paragraph } from "@/components/ui/typography";
 import * as z from 'zod';
 import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -118,36 +120,16 @@ export default function Dashboard() {
         }
     };
 
-
-    // if (!session || !session?.user) {
-    //     return <div>Please login to continue</div>
-    // }
     return (
         <div className="min-h-screen bg-gray-100">
-            {/* Sidebar */}
-            {/* <aside className="w-64 bg-gradient-to-b from-teal-900 to-teal-700 text-white p-6 hidden md:block">
-                <div className="flex items-center space-x-2 mb-8">
-
-                </div>
-                <nav className="space-y-4">
-                    <Link href="/dashboard" className="flex items-center space-x-2 text-teal-200 hover:text-white transition-colors">
-                        <LayoutDashboard className="h-5 w-5" />
-                        <span>Dashboard</span>
-                    </Link>
-
-
-                </nav>
-            </aside> */}
-
-            {/* Main Content */}
             <main className="p-4 md:p-6">
                 {/* Header */}
-                <header className="bg-gradient-to-r from-gray-900 to-teal-800 text-white rounded-2xl p-8 mb-8 shadow-2xl relative overflow-hidden animate-fade-in">
-                    <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
+                <header className="bg-gradient-to-r from-gray-900 to-teal-800 text-white rounded-2xl p-6 md:p-8 mb-8 shadow-2xl relative animate-fade-in">
+                    <div className="absolute rounded-2xl inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
                     <div className="flex justify-between items-center">
                         <div className="flex items-center space-x-4">
                             <HatGlasses className="h-10 w-10 text-teal-300 animate-pulse" />
-                            <h1 className="text-4xl font-extrabold tracking-tight">Welcome, @{username}</h1>
+                            <Heading level="pageheading"  className="font-extrabold tracking-tight md:block hidden ">Welcome, @{username}</Heading>
                         </div>
                         <Button
                             variant="glassy"
@@ -160,16 +142,18 @@ export default function Dashboard() {
                     </div>
                 </header>
 
+
                 {/* Profile Summary & Controls */}
-                <section className="bg-gradient-to-r from-teal-900 to-teal-700 text-white rounded-xl p-8 mb-8 shadow-2xl relative overflow-hidden animate-fade-in">
+                <section className="bg-gradient-to-r from-teal-900 to-teal-700 text-white rounded-xl p-6 md:p-8 mb-8 shadow-2xl relative overflow-hidden animate-fade-in">
                     <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* Left: Profile Info */}
-                        <div className="space-y-6">
-                            <h2 className="text-4xl font-extrabold tracking-tight">Your Feedback Hub</h2>
-                            <p className="text-lg opacity-90 max-w-md">
-                                Manage your anonymous feedback and share your profile to get more insights.
-                            </p>
+                        <div className="space-y-4 md:space-y-6">
+                            <Heading level="sectionheadinglarge"  className="font-extrabold tracking-tight">Your Feedback Hub</Heading>
+                             <Paragraph size="xl" className="opacity-90 max-w-md">
+                                 Manage your anonymous feedback and share your profile to get more insights.
+                             </Paragraph>
+                            
                         </div>
 
                         {/* Right: Toggle & Copy URL */}
@@ -188,7 +172,8 @@ export default function Dashboard() {
                                         Accept Anonymous Messages
                                     </label>
                                 </div>
-                                <span className="text-xs text-teal-300/60">Currently:     {acceptMessages ? " On" : " Off"}</span>
+                                 <Paragraph size="sm" className="text-teal-300/60">Currently:     {acceptMessages ? " On" : " Off"}</Paragraph>
+                                
                             </div>
 
                             {/* Copy URL */}
@@ -198,7 +183,7 @@ export default function Dashboard() {
                                     <Input
                                         value={profileLink as string}
                                         readOnly
-                                        className="bg-white/5 border-white/30 text-white placeholder-teal-200 rounded-lg"
+                                        className="bg-white/5 border-white/30 text-white rounded-lg"
                                     />
                                     <Button
                                         onClick={handleCopy}
@@ -214,10 +199,10 @@ export default function Dashboard() {
 
                 {/* Received Messages */}
                 <section className="mb-8">
-                    <div className="flex justify-between md:flex-row flex-col mb-6 items-center" >
-                        <h2 className="text-3xl font-bold text-gray-900 ">Your Received Messages</h2>
+                    <div className="flex justify-between md:flex-row flex-col mb-6 items-center gap-3" >
+                        <Heading level="sectionheading" className="font-bold text-gray-900">Your Received Messages</Heading>
                         <Button
-                        className="self-end"
+                            className="self-end"
                             onClick={(e) => {
                                 e.preventDefault();
                                 fetchMessages(true);
@@ -235,50 +220,36 @@ export default function Dashboard() {
                             <p>No messages yet. Share your profile link to start receiving feedback!</p>
                         </div>
                     ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
                             {messages.map((message) => (
-                                <div
+                                <MessageCard
                                     key={message._id as string}
-                                    className="bg-white/10 backdrop-blur-md border border-teal-300/50 rounded-xl p-6 relative overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in"
-                                >
-                                    <Trash2
-                                        onClick={() => handleDeleteConfirm(message._id as string)}
-                                        className="absolute top-3 right-3 h-5 w-5 text-red-500 cursor-pointer" />
-                                    <div className="text-start text-gray-800 font-medium italic leading-relaxed">
-                                        "{message.content}"
-                                    </div>
-                                    <div className="flex justify-start mt-3 text-xs text-gray-400">
-                                        {new Date(message.createdAt).toLocaleDateString("en-US", {
-                                            weekday: "short",  // "Thu"
-                                            day: "2-digit",    // "22"
-                                            month: "long",     // "April"
-                                            year: "numeric"    // "2025"
-                                        })}
-
-                                    </div>
-                                    <div className="absolute inset-0 bg-gradient-to-t from-teal-900/20 to-transparent pointer-events-none"></div>
-                                </div>
+                                    message={message}
+                                    onDelete={handleDeleteConfirm}
+                                />
                             ))}
                         </div>
                     )}
                 </section>
 
                 {/* CTA: Upgrade or Settings */}
-                <section className="bg-gradient-to-r from-teal-900 to-teal-700 text-white rounded-2xl p-8 text-center shadow-2xl relative">
+                <section className="bg-gradient-to-r from-teal-900 to-teal-700 text-white p-6 md:p-8 rounded-2xl text-center shadow-2xl relative">
                     {/* Subtle overlay for depth */}
-                    <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none rounded-2xl"></div>
                     <div className="flex justify-center items-center gap-2 mb-4">
-                        <Gem className="w-10 h-10 text-teal-300 animate-pulse" />
-                        <h2 className="text-4xl font-extrabold tracking-tight flex justify-center items-center">Premium Features</h2>
+                        <Gem className="md:w-10 md:h-10 w-7 h-7 text-teal-300 animate-pulse" />
+                        
+                        <Heading level="sectionheadinglarge"  className=" font-extrabold tracking-tight flex justify-center items-center">Premium Features</Heading>
+                      
                     </div>
-                    <p className="text-lg opacity-90 max-w-md mx-auto mb-6">
-                        Unlock advanced analytics, custom prompts, and exclusive tools with True Voice Premium.
-                    </p>
+                    
+                     <Paragraph size="xl" className="opacity-90 max-w-md mx-auto mb-6"> Unlock advanced analytics, custom prompts, and exclusive tools with True Voice Premium.</Paragraph>
+                   
                     <div className="flex justify-center items-center gap-4">
 
                         <Button
                             variant='dummy'
-                            className=" ">
+                            className="">
                             Coming Soon
 
                         </Button>

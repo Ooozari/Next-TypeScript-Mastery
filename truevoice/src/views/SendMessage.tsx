@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { Heading, Paragraph } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";

@@ -14,7 +14,7 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
-          "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+          "bg-transparent border-1 border-teal-400/80 text-teal-400/80 hover:bg-teal-500/30 border-teal-500 backdrop-blur-sm font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg hover:scale-105",
         attractive: "bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-semibold",
         glassy: "border border-teal-200 bg-white/10 backdrop-blur-md border-teal-300/50 text-teal-200 hover:bg-teal-500/90 hover:text-white font-semibold py-3 px-6",
         dummy: "hover:bg-white/15 transition-all duration-300 hover:scale-105 bg-white/10 backdrop-blur-md border border-teal-200/50 text-teal-200 text-sm font-semibold rounded-full shadow-sm animate-pulse px-4 py-1.5",

@@ -1,82 +1,42 @@
-'use client';
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import {
-    Card,
-    CardAction,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
-import { Button } from "../ui/button";
-import { X } from "lucide-react";
-import axios, {AxiosError} from "axios";
+import { Trash2 } from "lucide-react";
 import { Imessage } from "@/models/User";
-import toast from "react-hot-toast";
-import { ApiResponse } from "@/types/ApiResponse";
+import { Heading, Paragraph } from "@/components/ui/typography";
 
-
-
-
-type MessageCard = {
-    message: Imessage,
-    onMessageDelete: (messageId: string) => void
+interface MessageCardProps {
+    message: Imessage;
+    onDelete?: (id: string) => void;
 }
 
-export default function MessageCard({ message, onMessageDelete }: MessageCard) {
-
-    const handleDeleteConfirm = async () => {
-        try {
-            const res = await axios.delete(`/api/delete-message/${message._id}`)
-            toast.loading('Deleting...');
-            onMessageDelete(message._id as string);
-        } catch (error) {
-            const axiosError = error as AxiosError<ApiResponse>
-            toast.error(axiosError.response?.data.message || "Error deleting message");
-        } finally {
-            toast.success('Message deleted!');
-        }
-    }
+export default function MessageCard({ message, onDelete }: MessageCardProps) {
     return (
-        <>
-            <Card>
-                <CardHeader>
-                    <CardTitle>Card Title</CardTitle>
-                    <AlertDialog>
-                        <AlertDialogTrigger asChild>
-                            <Button variant="destructive"><X /></Button>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                            <AlertDialogHeader>
-                                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                                <AlertDialogDescription>
-                                    This action cannot be undone. This will permanently delete your
-                                    account and remove your data from our servers.
-                                </AlertDialogDescription>
-                            </AlertDialogHeader>
-                            <AlertDialogFooter>
-                                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                <AlertDialogAction onClick={handleDeleteConfirm}>Continue</AlertDialogAction>
-                            </AlertDialogFooter>
-                        </AlertDialogContent>
-                    </AlertDialog>
-                </CardHeader>
-                <CardContent>
-                    <p>Card Content</p>
-                </CardContent>
-            </Card>
-        </>
-    )
-}
+        <div
+            key={message._id as string}
+            className="bg-white/10 backdrop-blur-md border border-teal-300/50 rounded-xl p-6 relative overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in"
+        >
+            {/* Delete Button */}
+            {onDelete &&
+                <Trash2
+                    onClick={() => onDelete(message._id as string)}
+                    className="absolute top-2 right-2 h-5 w-5 text-red-400 cursor-pointer hover:text-red-500"
+                />
+            }
 
+
+            {/* Content */}
+             <Paragraph size="large" className="text-start text-gray-800 font-medium italic leading-relaxed">
+                 "{message.content}"
+             </Paragraph>
+            
+
+            {/* Date */}
+             <Paragraph size="sm" className="flex justify-start mt-3 text-gray-400">{new Date(message.createdAt).toLocaleDateString("en-US", {
+                    weekday: "short",
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric",
+                })}</Paragraph>
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-teal-900/20 to-transparent pointer-events-none"></div>
+        </div>
+    );
+}

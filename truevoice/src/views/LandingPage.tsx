@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Keyboard, Navigation } from "swiper/modules";
 import "swiper/css";
+import { Heading, Paragraph } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
@@ -77,22 +78,18 @@ export default function LandingPage() {
             {/* Hero */}
             <section className="min-h-[100vh] bg-gradient-to-b from-gray-800 to-teal-900 text-white flex items-center justify-center">
                 <div className="text-center space-y-6 px-6 md:px-0">
-                    <h1 className="text-3xl md:text-4xl xl:text-6xl font-extrabold">
-                        Speak Freely, Grow Together
-                    </h1>
-                    <p className="text-xl max-w-2xl mx-auto">
-                        True Voice lets you send and receive anonymous feedback from friends, colleagues, or anyone—no judgments, just insights.
-                    </p>
-                    <div className="space-x-4 flex justify-center">
+                    <Heading level="h1" className="font-extrabold">Speak Freely, Grow Together</Heading>
+                    <Paragraph size="xxl" className=" max-w-2xl mx-auto"> True Voice lets you send and receive anonymous feedback from friends, colleagues, or anyone—no judgments, just insights.</Paragraph>
 
+                    <div className="flex flex-col md:flex-row gap-2 md:gap-4 justify-center">
                         <Link href="/sign-up">
-                            <Button 
-                            variant="attractive"
-                            className="py-3 px-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                            <Button
+                                variant="attractive"
+                                className="py-3 px-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
                                 Sign Up Free
                             </Button>
                         </Link>
-                        <Link href="#quick-send">
+                        <Link href="#quick-send" className="flex justify-center">
                             <Button
                                 variant="glassy"
                                 className="py-3 px-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 group flex gap-2 items-center"
@@ -107,24 +104,21 @@ export default function LandingPage() {
 
             {/* Features */}
             <section className="py-16 bg-gray-100">
-                <div className="max-w-7xl mx-auto text-center px-6">
-                    <h2 className="text-4xl font-extrabold mb-8 text-gray-900 tracking-tight">
-                        See What Anonymous Feedback Looks Like
-                    </h2>
-                    <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-                        Browse sample messages to get inspired. Real feedback, zero filters.
-                    </p>
+                <div className="max-w-7xl mx-auto text-center px-4 md:px-6">
+
+                    <Heading level="sectionheadinglarge" className="font-extrabold mb-8 text-gray-900 tracking-tight">See What Anonymous Feedback Looks Like</Heading>
+                    <Paragraph size="xl" className="text-gray-600 mb-8 max-w-2xl mx-auto"> Browse sample messages to get inspired. Real feedback, zero filters.</Paragraph>
+
                     <div className="flex justify-end items-center mb-8">
                         <div className="flex gap-2">
                             <Button
-                                variant="ghost"
-                                className="swiper-button-prev !text-gray-700 hover:!text-teal-600"
+                                variant="outline"
+                                className="swiper-button-prev"
                             >
                                 <ArrowLeft />
                             </Button>
                             <Button
-                                variant="ghost"
-                                className="swiper-button-next !text-gray-700 hover:!text-teal-600"
+                                className="swiper-button-next"
                             >
                                 <ArrowRight />
                             </Button>
@@ -153,7 +147,7 @@ export default function LandingPage() {
                                 <SwiperSlide
                                     key={index}
                                     className={`flex justify-center items-center py-5 transition-transform duration-300 
-                                ${currentSlideIndex === index ? "scale-100 z-10" : "scale-95 opacity-80"}`}
+                                ${currentSlideIndex === index ? "scale-110 z-10" : "scale-95 opacity-80"}`}
                                 >
                                     <div
                                         className={`${currentSlideIndex === index
@@ -162,14 +156,14 @@ export default function LandingPage() {
                                             } rounded-xl p-6 w-full max-w-sm relative overflow-hidden transition-all duration-300  hover:scale-105 animate-fade-in`}
                                     >
                                         {/* Message Content */}
-                                        <div className={`text-start line-clamp-3  ${currentSlideIndex === index ? 'text-black' : 'text-gray-600'} font-medium italic leading-relaxed`}>
+                                        <Paragraph size="large" className={`text-start line-clamp-3  ${currentSlideIndex === index ? 'text-black' : 'text-gray-600'} font-medium italic leading-relaxed`}>
                                             "{message.content}"
-                                        </div>
+                                        </Paragraph>
+
 
                                         {/* Timestamp */}
-                                        <div className="flex justify-start mt-3 text-xs text-teal-300/60">
-                                            {message.received}
-                                        </div>
+                                        <Paragraph size="sm" className="flex justify-start mt-3 text-gray-800/90">{message.received}</Paragraph>
+
 
                                         {/* Subtle Gradient Overlay for Depth */}
                                         <div className="absolute inset-0 bg-gradient-to-t from-teal-900/20 to-transparent pointer-events-none"></div>
@@ -190,25 +184,22 @@ export default function LandingPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         {/* Left: Text Content */}
                         <div className="space-y-6">
-                            <h2 className="text-5xl font-extrabold tracking-tight leading-tight">
-                                Send Anonymous Feedback Now
-                            </h2>
-                            <p className="text-lg opacity-90 max-w-md">
-                                Effortlessly share honest insights by entering a username or profile URL. Stay disguised, speak freely, and foster meaningful growth.
-                            </p>
-                            <p className="text-sm opacity-80">
-                                Want your own feedback page?{' '}
+
+                            <Heading level="sectionheadingmd" className="font-extrabold tracking-tight leading-tight"> Send Anonymous Feedback Now</Heading>
+
+                            <Paragraph size="xl" className="opacity-90 max-w-md">Effortlessly share honest insights by entering a username or profile URL. Stay disguised, speak freely, and foster meaningful growth.</Paragraph>
+                            <Paragraph size="normal" className=" opacity-80">Want your own feedback page?{' '}
                                 <Link href="/sign-up" className="text-teal-300 font-medium hover:text-white transition-colors">
                                     Create a Profile
                                 </Link>
-                            </p>
+                            </Paragraph>
                         </div>
 
                         {/* Right: Form */}
-                        <div className="bg-white/10 backdrop-blur-md p-8 rounded-xl shadow-2xl border border-white/20">
+                        <div className="bg-white/10 backdrop-blur-md p-6 md:p-8 rounded-xl shadow-2xl border border-white/20">
                             <div className="flex justify-center">
                                 {/* Thematic Icon */}
-                                <HatGlasses className="h-20 w-20 text-teal-300 mb-4 animate-fade-in" />
+                                <HatGlasses className="w-18 h-18 md:h-20 md:w-20 text-teal-300 mb-4 animate-fade-in" />
                             </div>
                             <Form {...searchProfileForm}>
                                 <form onSubmit={searchProfileForm.handleSubmit(onSubmit)} className="space-y-6">

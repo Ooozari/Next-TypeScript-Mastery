@@ -2,6 +2,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
+import { Heading, Paragraph } from "@/components/ui/typography";
 import axios, { AxiosError } from 'axios'
 import { useState, useEffect } from 'react';
 import { useDebounceCallback } from 'usehooks-ts'
@@ -21,7 +22,7 @@ import {
 } from "@/components/ui/form"
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
-import { Loader2 } from 'lucide-react'
+import { HatGlasses, Loader2 } from 'lucide-react'
 
 
 
@@ -94,102 +95,111 @@ export default function Signup() {
 
     }
     return (
-        <>
-            <div className="flex justify-center items-center min-h-screen bg-gray-800">
-                <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
-                    <div className="text-center">
-                        <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
-                            Join True Voice
-                        </h1>
-                        <p className="mb-4">Sign up to start your anonymous adventure</p>
+        <div className="min-h-screen bg-gradient-to-b from-gray-900 to-teal-900/70 flex justify-center items-center relative py-10 px-4">
+            <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
+            <div className="w-full max-w-md p-6 md:p-8 space-y-8 bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl border border-teal-300/50 animate-fade-in">
+                <div className="text-center space-y-4">
+                    <div className='flex justify-center items-center gap-4'>
+                        <HatGlasses className="h-10 w-10 md:h-12 md:w-12 text-teal-300  animate-pulse" />
+                        <Heading level="sectionheadinglarge" className="font-extrabold tracking-tight text-white">Join True Voice</Heading>
                     </div>
+                    <Paragraph size="xl" className="text-teal-100 opacity-90 max-w-sm mx-auto">Sign up to start your anonymous adventure</Paragraph>
+                </div>
 
-                    <Form {...signupForm}>
-                        <form onSubmit={signupForm.handleSubmit(onSubmit)} className="space-y-6">
-                            <FormField
-                                control={signupForm.control}
-                                name="username"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Username</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="username"
-                                                {...field}
-                                                onChange={(e) => {
-                                                    field.onChange(e)
-                                                    setUsername(e.target.value)
-                                                }} />
-                                        </FormControl>
-                                        {usernameMsg && (
-                                            <p
-                                                className={`text-sm ${usernameMsg === 'Username is unique'
-                                                        ? 'text-green-500'
-                                                        : 'text-red-500'
-                                                    }`}
-                                            >
-                                                {usernameMsg}
-                                            </p>
-                                        )}
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={signupForm.control}
-                                name="email"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Email</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="email"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={signupForm.control}
-                                name="password"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Password</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="password"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <Button type="submit" className='w-full'>
-                                {
-                                    isSubmitting ? (
-                                        <>
+                <Form {...signupForm}>
+                    <form onSubmit={signupForm.handleSubmit(onSubmit)} className="space-y-6">
+                        <FormField
+                            control={signupForm.control}
+                            name="username"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-teal-200">Username</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="username"
+                                            {...field}
+                                            onChange={(e) => {
+                                                field.onChange(e);
+                                                debounced(e.target.value); // update username for redirect
+                                                setUsernameMsg(e.target.value ? "Username is unique" : "");
+                                            }}
 
-                                            <Loader2 className='animate-spin mr-2' /> <span>Submiting...</span>
-                                        </>
-                                    ) : ('Sign up')
-                                }
-
-                            </Button>
-                        </form>
-                    </Form>
-                    <div className="text-center mt-4">
-                        <p>
-                            Already a member?{' '}
-                            <Link href="/sign-in" className="text-blue-600 hover:text-blue-800">
-                                Sign in
-                            </Link>
-                        </p>
-                    </div>
+                                        />
+                                    </FormControl>
+                                    {usernameMsg && (
+                                        <p
+                                            className={`text-sm ${usernameMsg === "Username is unique"
+                                                ? "text-teal-300"
+                                                : "text-red-300"
+                                                }`}
+                                        >
+                                            {usernameMsg}
+                                        </p>
+                                    )}
+                                    <FormMessage className="text-red-300" />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={signupForm.control}
+                            name="email"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-teal-200">Email</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="email"
+                                            className=""
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage className="text-red-300" />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={signupForm.control}
+                            name="password"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-teal-200">Password</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="password"
+                                            type="password"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage className="text-red-300" />
+                                </FormItem>
+                            )}
+                        />
+                        <Button
+                            type="submit"
+                            className="w-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? (
+                                <>
+                                    <Loader2 className="animate-spin mr-2 h-5 w-5" />
+                                    <span>Submitting...</span>
+                                </>
+                            ) : (
+                                "Sign Up"
+                            )}
+                        </Button>
+                    </form>
+                </Form>
+                <div className="text-center">
+                    <Paragraph size="large" className="text-teal-100"> Already a member?{" "}
+                        <Link
+                            href="/sign-in"
+                            className="text-teal-300 font-medium hover:text-white transition-colors"
+                        >
+                            Sign In
+                        </Link></Paragraph>
                 </div>
             </div>
-        </>
-    )
+        </div>
+    );
 }

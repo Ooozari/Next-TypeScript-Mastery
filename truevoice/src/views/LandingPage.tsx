@@ -73,7 +73,7 @@ export default function LandingPage() {
     return (
         <div className="min-h-screen bg-gray-100">
             {/* Hero */}
-            <section className="min-h-[100vh] bg-gradient-to-b from-gray-800 to-teal-900 text-white flex items-center justify-center">
+            <section className="min-h-[100vh] bg-gradient-to-b from-gray-800 to-teal-900 text-white flex items-center justify-center py-[100px] md:py-[120px]">
                 <div className="text-center space-y-6 px-6 md:px-0 container mx-auto">
                     <Heading level="h1" className="font-extrabold">Speak Freely, Grow Together</Heading>
                     <Paragraph size="xxl" className=" max-w-2xl mx-auto"> True Voice lets you send and receive anonymous feedback from friends, colleagues, or anyone—no judgments, just insights.</Paragraph>

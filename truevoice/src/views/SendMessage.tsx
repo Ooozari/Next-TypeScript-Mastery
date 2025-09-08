@@ -81,11 +81,11 @@ export default function SendMessage() {
     };
 
     return (
-        <div className="min-h-[100vh] bg-gradient-to-r from-teal-900 to-teal-700 relative">
+        <div className="min-h-[100vh] bg-gradient-to-r from-teal-900 to-teal-700 relative ">
             {/* Subtle texture overlay */}
             <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
             {/* Send Message Section */}
-            <section className="flex justify-center items-center text-white relative min-h-[100vh] container mx-auto">
+            <section className="py-[100px] md:py-[120px] text-white relative min-h-[100vh] container mx-auto">
                 <div className="max-w-6xl mx-auto px-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         {/* Left: User Info */}

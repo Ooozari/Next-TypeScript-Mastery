@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { AcceptMessageSchema } from "@/schemas/acceptMessageSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ApiResponse } from "@/types/ApiResponse";
+import Link from "next/link";
 
 
 export default function Dashboard() {
@@ -135,7 +136,8 @@ export default function Dashboard() {
                     <div className="absolute rounded-2xl inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
                     <div className="flex justify-between items-center">
                         <div className="flex items-center space-x-4">
-                            <HatGlasses className="h-10 w-10 text-teal-300 animate-pulse" />
+                            <Link href='/'
+                            ><HatGlasses className="h-10 w-10 text-teal-300 animate-pulse" /></Link>
                             <Heading level="pageheading"  className="font-extrabold tracking-tight md:block hidden ">Welcome, @{username}</Heading>
                         </div>
                         <Button

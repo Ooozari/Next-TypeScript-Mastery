@@ -103,7 +103,7 @@ export default function LandingPage() {
             <section className="py-16 bg-gray-100">
                 <div className="max-w-7xl mx-auto text-center px-4 md:px-6">
 
-                    <Heading level="sectionheadinglarge" className="font-extrabold mb-8 text-gray-900 tracking-tight">See What Anonymous Feedback Looks Like</Heading>
+                    <Heading level="sectionheadinglarge" className="font-extrabold mb-4 md:mb-8 text-gray-900 tracking-tight">See What Anonymous Feedback Looks Like</Heading>
                     <Paragraph size="xl" className="text-gray-600 mb-8 max-w-2xl mx-auto"> Browse sample messages to get inspired. Real feedback, zero filters.</Paragraph>
 
                     <div className="flex justify-end items-center mb-8">

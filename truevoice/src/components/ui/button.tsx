@@ -12,7 +12,7 @@ const buttonVariants = cva(
         default:
           "bg-teal-500 hover:bg-teal-400 text-white font-semibold py-3 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105",
         destructive:
-          "bg-red-600 text-white/80 hover:text-white hover:bg-red-700 shadow-xs hover:shadow-md focus-visible:ring-red-200/50 dark:bg-red-700/80 dark:focus-visible:ring-red-400/40 rounded-md transition-all duration-300 hover:scale-105",
+          "text-red-600 hover:text-red-500 transition-all duration-300 hover:scale-105",
         outline:
           "bg-transparent border-1 border-teal-400/80 text-teal-400/80 hover:bg-teal-500/30 border-teal-500 backdrop-blur-sm font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg hover:scale-105",
         attractive: "bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-semibold",

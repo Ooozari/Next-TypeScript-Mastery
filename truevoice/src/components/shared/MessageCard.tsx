@@ -16,16 +16,15 @@ export default function MessageCard({ message, onDelete, isDeletingMsg }: Messag
             className="bg-white/10 backdrop-blur-md border border-teal-300/50 rounded-xl p-6 relative overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in"
         >
             {/* Delete Button */}
-            <Button
-                size="icon"
-                className="absolute top-2 right-2"
-                variant='destructive'
+            <button
+               
+                className="absolute top-2 right-2 text-red-600 hover:text-red-500 transition-all duration-300 hover:scale-105 disabled:text-red-300 disabled:cursor-not-allowed disabled:hover:scale-100 cursor-pointer"
                 onClick={() => onDelete(message._id as string)}
                 disabled={isDeletingMsg}>
                 <Trash2
-                    className="h-8 w-8"
+                    className="h-5 w-5"
                 />
-            </Button>
+            </button>
 
             {/* Content */}
             <Paragraph size="large" className="text-start text-gray-800 font-medium italic leading-relaxed">

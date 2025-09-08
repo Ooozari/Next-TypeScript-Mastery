@@ -6,7 +6,7 @@ export default function Footer() {
         <>
             {/* Footer */}
             <footer className="py-8 bg-gradient-to-b from-gray-900 to-teal-900/70 text-white text-center">
-                <Heading level="sectionheading" className="font-bold mb-4">Ready to Hear Your Truth?</Heading>
+                <Heading level="sectionheading" className="font-bold mb-4 px-5">Ready to Hear Your Truth?</Heading>
 
                <Paragraph size="normal">
                     <Link href="/" className="text-gray-300 hover:text-white mx-2">Privacy Policy</Link>

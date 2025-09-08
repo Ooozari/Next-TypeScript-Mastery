@@ -224,7 +224,11 @@ export default function Dashboard() {
                         </Button>
                     </div>
 
-                    {messages.length === 0 ? (
+                    {  isLoading? (
+                        <p className="text-center text-gray-600">Loading...</p>
+                    ) :
+
+                    messages.length === 0 ? (
                         <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 text-center text-gray-600">
                             <p>No messages yet. Share your profile link to start receiving feedback!</p>
                         </div>

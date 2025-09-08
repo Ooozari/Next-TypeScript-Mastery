@@ -77,10 +77,10 @@ export default function Signin() {
                             name="identifier"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-teal-200">Email</FormLabel>
+                                    <FormLabel className="text-teal-200">Email/Username</FormLabel>
                                     <FormControl>
                                         <Input
-                                            placeholder="Email"
+                                            placeholder="Email/Username"
                                             {...field}
                                         />
                                     </FormControl>

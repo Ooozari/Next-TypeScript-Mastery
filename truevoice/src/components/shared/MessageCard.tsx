@@ -17,7 +17,6 @@ export default function MessageCard({ message, onDelete, isDeletingMsg }: Messag
         >
             {/* Delete Button */}
             <button
-               
                 className="absolute top-2 right-2 text-red-600 hover:text-red-500 transition-all duration-300 hover:scale-105 disabled:text-red-300 disabled:cursor-not-allowed disabled:hover:scale-100 cursor-pointer"
                 onClick={() => onDelete(message._id as string)}
                 disabled={isDeletingMsg}>

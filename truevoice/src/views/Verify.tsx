@@ -53,7 +53,6 @@ export default function Verify() {
 
                     <Heading level="sectionheadinglarge"  className="font-extrabold tracking-tight text-white"> Verify Your Account</Heading>
                      <Paragraph size="xl" className="text-teal-100 opacity-90 max-w-sm mx-auto">Enter the verification code sent to your email</Paragraph>
-                    
                 </div>
                 <Form {...verifyForm}>
                     <form onSubmit={verifyForm.handleSubmit(onSubmit)} className="space-y-6">

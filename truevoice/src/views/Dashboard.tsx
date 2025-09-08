@@ -16,9 +16,9 @@ import { AcceptMessageSchema } from "@/schemas/acceptMessageSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ApiResponse } from "@/types/ApiResponse";
 import Link from "next/link";
+import MessageSkeleton from "@/components/shared/MessageSkeleton";
 
 export default function Dashboard() {
-  
   const { data: session } = useSession();
   const username = session?.user.username;
   const [messages, setMessages] = useState<Imessage[]>([]);
@@ -252,7 +252,13 @@ export default function Dashboard() {
           </div>
 
           {isLoading ? (
-            <p className="text-center text-gray-600">Loading...</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
+              {Array.from({ length: Math.min(messages.length || 5, 6) }).map(
+                (_, i) => (
+                  <MessageSkeleton key={i} />
+                )
+              )}
+            </div>
           ) : messages.length === 0 ? (
             <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 text-center text-gray-600">
               <p>

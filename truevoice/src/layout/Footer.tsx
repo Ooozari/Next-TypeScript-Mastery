@@ -5,7 +5,9 @@ export default function Footer() {
     return (
         <>
             {/* Footer */}
+
             <footer className="py-8 bg-gradient-to-b from-gray-900 to-teal-900/70 text-white text-center">
+            <div className=" container mx-auto">
                 <Heading level="sectionheading" className="font-bold mb-4 px-5">Ready to Hear Your Truth?</Heading>
 
                <Paragraph size="normal">
@@ -15,7 +17,9 @@ export default function Footer() {
               </Paragraph>
 
                 <Paragraph size="large" className="text-gray-400 mt-4">© 2025 True Voice. All rights reserved.</Paragraph>
-            </footer></>
+                 </div>
+            </footer>
+            </>
     )
 }
 

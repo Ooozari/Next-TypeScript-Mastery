@@ -81,18 +81,16 @@ export default function SendMessage() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100">
-
+        <div className="min-h-[100vh] bg-gradient-to-r from-teal-900 to-teal-700 relative">
+            {/* Subtle texture overlay */}
+            <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
             {/* Send Message Section */}
-            <section className="py-20 md:py-[120px] bg-gradient-to-r from-teal-900 to-teal-700 text-white overflow-hidden relative min-h-[100vh]">
-                {/* Subtle texture overlay */}
-                <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
-
+            <section className="flex justify-center items-center text-white relative min-h-[100vh] container mx-auto">
                 <div className="max-w-6xl mx-auto px-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         {/* Left: User Info */}
                         <div className="space-y-6">
-                                <Heading level="sectionheadingmd" className="font-extrabold tracking-tight leading-tight">Send Feedback to @{username}</Heading>
+                            <Heading level="sectionheadingmd" className="font-extrabold tracking-tight leading-tight">Send Feedback to @{username}</Heading>
                             {/* Status Indicator */}
                             {isAcceptingMessages === null ? (
                                 <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-4 py-2 w-fit">

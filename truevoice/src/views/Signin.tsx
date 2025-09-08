@@ -62,9 +62,9 @@ export default function Signin() {
 
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-gray-900 to-teal-900/70 flex justify-center items-center relative  py-10 px-4">
+        <div className="min-h-screen bg-gradient-to-b from-gray-900 to-teal-900/70 flex justify-center items-center relative  py-10 px-4 ">
             <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
-            <div className="w-full max-w-md p-6 md:p-8 space-y-8 bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl border border-teal-300/50 animate-fade-in">
+            <div className="w-full max-w-md p-6 md:p-8 space-y-8 bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl border border-teal-300/50 animate-fade-in container mx-auto">
                 <div className="text-center space-y-4">
                     <Heading level="sectionheadinglarge"  className="font-extrabold tracking-tight text-white">Unlock Anonymous Insights</Heading>
                      <Paragraph size="xl" className=" text-teal-100 opacity-90 max-w-sm mx-auto"> Share honest feedback without revealing your identity</Paragraph>

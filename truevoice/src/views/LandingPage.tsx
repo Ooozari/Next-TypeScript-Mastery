@@ -74,7 +74,7 @@ export default function LandingPage() {
         <div className="min-h-screen bg-gray-100">
             {/* Hero */}
             <section className="min-h-[100vh] bg-gradient-to-b from-gray-800 to-teal-900 text-white flex items-center justify-center">
-                <div className="text-center space-y-6 px-6 md:px-0">
+                <div className="text-center space-y-6 px-6 md:px-0 container mx-auto">
                     <Heading level="h1" className="font-extrabold">Speak Freely, Grow Together</Heading>
                     <Paragraph size="xxl" className=" max-w-2xl mx-auto"> True Voice lets you send and receive anonymous feedback from friends, colleagues, or anyone—no judgments, just insights.</Paragraph>
 
@@ -101,8 +101,7 @@ export default function LandingPage() {
 
             {/* Features */}
             <section className="py-16 bg-gray-100">
-                <div className="max-w-7xl mx-auto text-center px-4 md:px-6">
-
+                <div className="max-w-7xl text-center px-4 md:px-6 container mx-auto">
                     <Heading level="sectionheadinglarge" className="font-extrabold mb-4 md:mb-8 text-gray-900 tracking-tight">See What Anonymous Feedback Looks Like</Heading>
                     <Paragraph size="xl" className="text-gray-600 mb-8 max-w-2xl mx-auto"> Browse sample messages to get inspired. Real feedback, zero filters.</Paragraph>
 
@@ -144,7 +143,7 @@ export default function LandingPage() {
                                 <SwiperSlide
                                     key={index}
                                     className={`flex justify-center items-center py-5 transition-transform duration-300 
-                                ${currentSlideIndex === index ? "scale-110 z-10" : "scale-95 opacity-80"}`}
+                                ${currentSlideIndex === index ? "md:scale-110 z-10" : "md:scale-95 opacity-80"}`}
                                 >
                                     <div
                                         className={`${currentSlideIndex === index
@@ -176,7 +175,7 @@ export default function LandingPage() {
                 {/* Overlay for premium subtle texture */}
                 <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
 
-                <div className="max-w-6xl mx-auto px-6">
+                <div className="max-w-6xl px-6 container mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         {/* Left: Text Content */}
                         <div className="space-y-6">

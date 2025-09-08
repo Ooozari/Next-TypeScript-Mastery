@@ -132,7 +132,7 @@ export default function Dashboard() {
         <div className="min-h-screen bg-gray-100">
             <main className="p-4 md:p-6">
                 {/* Header */}
-                <header className="bg-gradient-to-r from-gray-900 to-teal-800 text-white rounded-2xl p-6 md:p-8 mb-8 shadow-2xl relative animate-fade-in">
+                <header className="bg-gradient-to-r from-gray-900 to-teal-800 text-white rounded-2xl p-6 md:p-8 mb-8 shadow-2xl relative animate-fade-in container mx-auto">
                     <div className="absolute rounded-2xl inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
                     <div className="flex justify-between items-center">
                         <div className="flex items-center space-x-4">
@@ -153,7 +153,7 @@ export default function Dashboard() {
 
 
                 {/* Profile Summary & Controls */}
-                <section className="bg-gradient-to-r from-teal-900 to-teal-700 text-white rounded-xl p-6 md:p-8 mb-8 shadow-2xl relative overflow-hidden animate-fade-in">
+                <section className="bg-gradient-to-r from-teal-900 to-teal-700 text-white rounded-xl p-6 md:p-8 mb-8 shadow-2xl relative overflow-hidden animate-fade-in container mx-auto">
                     <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* Left: Profile Info */}
@@ -207,7 +207,7 @@ export default function Dashboard() {
                 </section>
 
                 {/* Received Messages */}
-                <section className="mb-8">
+                <section className="mb-8 container mx-auto">
                     <div className="flex justify-between md:flex-row flex-col mb-6 items-center gap-3" >
                         <Heading level="sectionheading" className="font-bold text-gray-900">Your Received Messages</Heading>
                         <Button
@@ -247,7 +247,7 @@ export default function Dashboard() {
                 </section>
 
                 {/* CTA: Upgrade or Settings */}
-                <section className="bg-gradient-to-r from-teal-900 to-teal-700 text-white p-6 md:p-8 rounded-2xl text-center shadow-2xl relative">
+                <section className="bg-gradient-to-r from-teal-900 to-teal-700 text-white p-6 md:p-8 rounded-2xl text-center shadow-2xl relative container mx-auto">
                     {/* Subtle overlay for depth */}
                     <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none rounded-2xl"></div>
                     <div className="flex justify-center items-center gap-2 mb-4">

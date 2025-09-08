@@ -97,7 +97,7 @@ export default function Signup() {
     return (
         <div className="min-h-screen bg-gradient-to-b from-gray-900 to-teal-900/70 flex justify-center items-center relative py-10 px-4">
             <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
-            <div className="w-full max-w-md p-6 md:p-8 space-y-8 bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl border border-teal-300/50 animate-fade-in">
+            <div className="w-full max-w-md p-6 md:p-8 space-y-8 bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl border border-teal-300/50 animate-fade-in container mx-auto">
                 <div className="text-center space-y-4">
                     <div className='flex justify-center items-center gap-4'>
                         <HatGlasses className="h-10 w-10 md:h-12 md:w-12 text-teal-300  animate-pulse" />

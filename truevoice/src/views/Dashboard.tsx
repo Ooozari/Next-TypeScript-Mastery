@@ -24,6 +24,8 @@ export default function Dashboard() {
     const [messages, setMessages] = useState<Imessage[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isSwitchLoading, setIsSwitchLoading] = useState(false);
+    const [isDeletingMsg, setIsDeletingMsg] = useState(false);
+    
 
     // Form + Zod Validations
     const form = useForm<z.infer<typeof AcceptMessageSchema>>({
@@ -108,14 +110,20 @@ export default function Dashboard() {
 
     // Delete Message End Point
     const handleDeleteConfirm = async (messageId: string) => {
+        console.log("delete button is clicked");
+        
+        setIsDeletingMsg(true)
+        const toastId = toast.loading("Deleting message...");
         try {
             const res = await axios.delete(`/api/delete-message/${messageId}`);
-            toast.success(res.data.message || "Message deleted!");
+            toast.success(res.data.message || "Message deleted!", { id: toastId });
             // Optionally refresh state:
             setMessages((prev) => prev.filter((msg) => msg._id !== messageId));
         } catch (error) {
             const axiosError = error as AxiosError<ApiResponse>;
-            toast.error(axiosError.response?.data.message || "Error deleting message");
+            toast.error(axiosError.response?.data.message || "Error deleting message",{ id: toastId });
+        }finally{
+             setIsDeletingMsg(false)
         }
     };
 
@@ -225,6 +233,7 @@ export default function Dashboard() {
                                     key={message._id as string}
                                     message={message}
                                     onDelete={handleDeleteConfirm}
+                                    isDeletingMsg={isDeletingMsg}
                                 />
                             ))}
                         </div>

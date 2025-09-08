@@ -24,7 +24,7 @@ export default function MessageCard({ message, onDelete }: MessageCardProps) {
 
             {/* Content */}
              <Paragraph size="large" className="text-start text-gray-800 font-medium italic leading-relaxed">
-                 "{message.content}"
+                 {`"${message.content}"`}
              </Paragraph>
             
 

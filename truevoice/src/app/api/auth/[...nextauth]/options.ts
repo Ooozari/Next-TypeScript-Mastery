@@ -1,103 +1,82 @@
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from 'bcryptjs';
+import bcrypt from "bcryptjs";
 import dbConnect from "@/lib/dbConnect";
-import UserModel from "@/models/User";
-
-
+import UserModel, { IUser } from "@/models/User";
 
 export const authOptions: NextAuthOptions = {
-    providers: [
-        // credentials
-        CredentialsProvider({
-            id: "credentials",
-            name: "Credentials",
+  providers: [
+    CredentialsProvider({
+      id: "credentials",
+      name: "Credentials",
+      credentials: {
+        identifier: { label: "Email/Username", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
 
-            credentials: {
-                identifier: { label: 'Email/Usernmae', type: 'text' },
-                password: { label: 'Password', type: 'password' },
-            },
+      async authorize(
+        credentials: Record<"identifier" | "password", string> | undefined
+      ): Promise<User | null> {
+        if (!credentials) return null;
 
-            async authorize(credentials: any): Promise<any> {
-                // Step 1: first connext to database
-                await dbConnect()
+        await dbConnect();
 
-                // Step 2:
-                try {
-                    const user = await UserModel.findOne({
-                        // Use $or for future-proof queries by username or email
-                        $or: [
-                            { email: credentials.identifier },
-                            { username: credentials.identifier }
-                        ]
-                    })
-                    // If user not found then return
-                    if (!user) {
-                        throw new Error("No user found with this email")
-                    }
-                    // If user is not verified then return
-                    if (!user.isVerified) {
-                        throw new Error("Please verfiy your account first")
-                    }
+        const user = await UserModel.findOne({
+          $or: [
+            { email: credentials.identifier },
+            { username: credentials.identifier },
+          ],
+        });
 
-                    // If user is found then compare password
-                    const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password)
+        if (!user) throw new Error("No user found");
+        if (!user.isVerified) throw new Error("Please verify your account first");
 
-                    // If isPasswordCorrect the return the user
-                    if (isPasswordCorrect) {
-                        //this user will the return to the credential provder and we can access it in the callback
-                        return user;
-                    }
-                    else {
-                        throw new Error("Incorrect password");
-                    }
+        const isPasswordCorrect = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
 
-                } catch (err: any) {
-                    throw new Error(err)
-                }
-            },
-        })
-    ],
-    pages: {
-        signIn: '/sign-in'
+        if (!isPasswordCorrect) throw new Error("Incorrect password");
+
+        // Map Mongoose user to NextAuth User
+        const nextAuthUser: User = {
+          id: user._id?.toString() || "",
+          name: user.username,
+          email: user.email,
+        };
+
+        return nextAuthUser;
+      },
+    }),
+  ],
+  pages: {
+    signIn: "/sign-in",
+  },
+  session: {
+    strategy: "jwt",
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token._id = (user as any).id;
+        token.username = (user as any).name;
+        token.isVerified = (user as any).isVerified;
+        token.isAcceptingMsg = (user as any).isAcceptingMsg;
+      }
+      return token;
     },
-    session: {
-        strategy: 'jwt'
+    async session({ session, token }) {
+      if (token) {
+        session.user = {
+          ...session.user,
+          _id: token._id,
+          username: token.username,
+          isVerified: token.isVerified,
+          isAcceptingMsg: token.isAcceptingMsg,
+        };
+      }
+      return session;
     },
-    callbacks: {
-        // here the user is coming from the credentials
-        async jwt({ token, user }) {
-            // we have to customize the token here according to our requirement
-            // for that we have to define types in next-auth.d.ts
-
-
-            // if user is exsiting we only need it then
-            if (user) {
-                // add new properties to tokens
-                token._id = user._id?.toString()
-                token.username = user.username
-                token.isVerified = user.isVerified
-                token.isAcceptingMsg = user.isAcceptingMsg
-            }
-            return token
-        },
-        async session({ session, token }) {
-            if (token) {
-                // add new properties to tokens
-                session.user = {
-                    ...session.user, // keep email, name, image
-                    _id: token._id?.toString(),
-                    username: token.username,
-                    isVerified: token.isVerified,
-                    isAcceptingMsg: token.isAcceptingMsg,
-                };
-            }
-            return session
-        },
-
-    },
-    secret: process.env.NEXTAUTH_SECRET
-
-}
-
-
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+};

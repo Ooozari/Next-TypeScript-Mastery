@@ -154,9 +154,8 @@ export default function LandingPage() {
                                     >
                                         {/* Message Content */}
                                         <Paragraph size="large" className={`text-start line-clamp-3  ${currentSlideIndex === index ? 'text-black' : 'text-gray-600'} font-medium italic leading-relaxed`}>
-                                            "{message.content}"
+                                            {`"${message.content}"`}
                                         </Paragraph>
-
 
                                         {/* Timestamp */}
                                         <Paragraph size="sm" className="flex justify-start mt-3 text-gray-800/90">{message.received}</Paragraph>

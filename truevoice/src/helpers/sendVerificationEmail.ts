@@ -22,9 +22,6 @@ export async function sendVerificationEmail(
       html: emailHtml,
     };
 
-    const info = await transporter.sendMail(mailOptions);
-
-  
     return { success: true, message: "Verification email sent successfully" };
   } catch (error: any) {
     console.error("Nodemailer Error:", error);

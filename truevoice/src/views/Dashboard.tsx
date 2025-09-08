@@ -87,8 +87,7 @@ export default function Dashboard() {
     useEffect(() => {
         if (!session || !session?.user) return
         fetchMessages(),
-            fetchAcceptMessage()
-
+        fetchAcceptMessage()
     }, [session, setValue, fetchMessages])
 
 

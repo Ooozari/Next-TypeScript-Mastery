@@ -34,9 +34,6 @@ export default function LandingPage() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const router = useRouter()
 
-
-
-
     const searchProfileForm = useForm<z.infer<typeof searchUserProfileSchema>>({
         resolver: zodResolver(searchUserProfileSchema),
         defaultValues: {

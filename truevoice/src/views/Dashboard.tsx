@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
-import { HatGlasses, Copy, LogOut, Gem, Trash2, RefreshCw } from "lucide-react";
+import { HatGlasses, Copy, LogOut, Gem, RefreshCw } from "lucide-react";
 import { MessageCard } from '@/components/shared'
 import { Heading, Paragraph } from "@/components/ui/typography";
 import * as z from 'zod';

@@ -9,7 +9,7 @@ const usernameVerficationSchema = z.object({
 })
 
 export async function GET(request: Request) {
-    await dbConnect()
+    await dbConnect();
 
     try {
         // getting the whole url (localhost:3000/api/username?=ooozari)

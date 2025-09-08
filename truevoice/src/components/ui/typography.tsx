@@ -15,7 +15,7 @@ const headingVariants = cva("", {
       normal: "text-[14px] md:text-[16px]",
       medium: "text-[16px] md:text-[18px]",
        // using
-      lg: "text-[24px]",
+      lg: "text-[20px]",
       pageheading:
         "text-[30px] md:text-[36px]",
         // using

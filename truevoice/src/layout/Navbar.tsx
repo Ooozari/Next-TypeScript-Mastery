@@ -20,13 +20,13 @@ function Navbar() {
             <div className="fixed top-2 flex justify-center items-center md:mx-2 w-full z-50">
                 <div className="relative flex justify-center items-center md:max-w-xl w-full flex-col">
                     <nav
-                        className={`flex max-w-[95%] md:max-w-xl w-full mx-auto justify-between bg-gradient-to-b from-teal-900 to-teal-700 text-white py-3 px-5 md:py-5 md:px-10 ${
+                        className={`flex max-w-[95%] md:max-w-xl w-full mx-auto justify-between bg-gradient-to-b from-teal-900 to-teal-700 text-white py-3 px-5 md:py-5 md:px-6 ${
                             openMobileMenu ? "rounded-t-4xl" : "rounded-4xl"
                         } items-center shadow-lg`}
                     >
                         <div className="text-2xl font-bold">
                             <Link href="/" className="flex gap-2 items-center">
-                                <HatGlasses className="h-8 w-8 text-teal-300 animate-pulse" />
+                                <HatGlasses className="h-8 w-8 md:h-10 md:w-10 text-teal-300 animate-pulse" />
                                 <Heading level="lg" className="font-bold">
                                     True Voice
                                 </Heading>

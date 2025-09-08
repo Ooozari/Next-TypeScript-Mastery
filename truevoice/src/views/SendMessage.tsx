@@ -84,7 +84,7 @@ export default function SendMessage() {
         <div className="min-h-screen bg-gray-100">
 
             {/* Send Message Section */}
-            <section className="py-20 bg-gradient-to-r from-teal-900 to-teal-700 text-white overflow-hidden relative min-h-[100vh]">
+            <section className="py-20 md:py-[120px] bg-gradient-to-r from-teal-900 to-teal-700 text-white overflow-hidden relative min-h-[100vh]">
                 {/* Subtle texture overlay */}
                 <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
 
@@ -92,9 +92,7 @@ export default function SendMessage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         {/* Left: User Info */}
                         <div className="space-y-6">
-                            <HatGlasses className="h-20 w-20 text-teal-300 mb-4 animate-pulse" />
-                            <Heading level="sectionheadingmd" className="font-extrabold tracking-tight leading-tight">Send Feedback to @{username}</Heading>
-
+                                <Heading level="sectionheadingmd" className="font-extrabold tracking-tight leading-tight">Send Feedback to @{username}</Heading>
                             {/* Status Indicator */}
                             {isAcceptingMessages === null ? (
                                 <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-4 py-2 w-fit">
@@ -123,7 +121,7 @@ export default function SendMessage() {
                         </div>
 
                         {/* Right: Message Form */}
-                        <div className="bg-white/10 backdrop-blur-md p-8 rounded-xl shadow-2xl border border-white/20">
+                        <div className="bg-white/10 backdrop-blur-md p-6 md:p-8 rounded-xl shadow-2xl border border-white/20">
                             <Form {...sendMessageForm}>
                                 <form onSubmit={sendMessageForm.handleSubmit(onSubmit)} className="space-y-6">
                                     <FormField
@@ -137,7 +135,7 @@ export default function SendMessage() {
                                                         <Textarea
                                                             disabled={isSubmitting || !isAcceptingMessages}
                                                             {...field}
-                                                            placeholder="Type your feedback here (e.g., 'Great work on the project! Try adding more visuals.')"
+                                                            placeholder="Type your feedback here "
                                                             className="min-h-[150px]"
                                                         />
                                                     </ScrollArea>

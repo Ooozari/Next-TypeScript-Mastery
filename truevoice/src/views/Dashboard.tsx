@@ -16,7 +16,12 @@ import { AcceptMessageSchema } from "@/schemas/acceptMessageSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ApiResponse } from "@/types/ApiResponse";
 import Link from "next/link";
-import MessageSkeleton from "@/components/shared/MessageSkeleton";
+import {
+  MessageSkeleton,
+  ProfileLinkSkeleton,
+  ToggleSwitchSkeleton,
+  HeadingSkeleton,
+} from "@/components/shared";
 
 export default function Dashboard() {
   const { data: session } = useSession();
@@ -25,6 +30,7 @@ export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSwitchLoading, setIsSwitchLoading] = useState(false);
   const [isDeletingMsg, setIsDeletingMsg] = useState(false);
+  const [hasFetched, setHasFetched] = useState(false);
 
   // Form + Zod Validations
   const form = useForm<z.infer<typeof AcceptMessageSchema>>({
@@ -48,6 +54,7 @@ export default function Dashboard() {
       );
     } finally {
       setIsSwitchLoading(false);
+      
     }
   }, [setValue]);
 
@@ -58,6 +65,7 @@ export default function Dashboard() {
       try {
         const res = await axios.get<ApiResponse>("/api/get-messages");
         setMessages(res.data.messages || []);
+        setHasFetched(true);
         if (refresh) toast.success("You are up to date");
       } catch (error) {
         const axiosError = error as AxiosError<ApiResponse>;
@@ -115,8 +123,6 @@ export default function Dashboard() {
 
   // Delete Message End Point
   const handleDeleteConfirm = async (messageId: string) => {
-    console.log("delete button is clicked");
-
     setIsDeletingMsg(true);
     const toastId = toast.loading("Deleting message...");
     try {
@@ -146,12 +152,16 @@ export default function Dashboard() {
               <Link href="/">
                 <HatGlasses className="h-10 w-10 text-teal-300 animate-pulse" />
               </Link>
-              <Heading
-                level="pageheading"
-                className="font-extrabold tracking-tight md:block hidden "
-              >
-                Welcome, @{username}
-              </Heading>
+              {username ? (
+                <Heading
+                  level="pageheading"
+                  className="font-extrabold tracking-tight md:block hidden "
+                >
+                  Welcome, @{username}
+                </Heading>
+              ) : (
+                <HeadingSkeleton />
+              )}
             </div>
             <Button
               variant="glassy"
@@ -185,47 +195,55 @@ export default function Dashboard() {
             {/* Right: Toggle & Copy URL */}
             <div className="space-y-6">
               {/* Toggle Switch */}
-              <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-4 flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <Switch
-                    {...register("acceptMessages")}
-                    disabled={isSwitchLoading}
-                    checked={acceptMessages}
-                    onCheckedChange={handleSwitchChange}
-                    id="accept-messages"
-                    className="data-[state=checked]:bg-teal-500"
-                  />
-                  <label
-                    htmlFor="accept-messages"
-                    className="text-sm font-medium"
-                  >
-                    Accept Anonymous Messages
-                  </label>
+              {acceptMessages === undefined ? (
+                <ToggleSwitchSkeleton />
+              ) : (
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-4 flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <Switch
+                      {...register("acceptMessages")}
+                      disabled={isSwitchLoading}
+                      checked={acceptMessages}
+                      onCheckedChange={handleSwitchChange}
+                      id="accept-messages"
+                      className="data-[state=checked]:bg-teal-500"
+                    />
+                    <label
+                      htmlFor="accept-messages"
+                      className="text-sm font-medium"
+                    >
+                      Accept Anonymous Messages
+                    </label>
+                  </div>
+                  <Paragraph size="sm" className="text-teal-300/60">
+                    Currently: {acceptMessages ? " On" : " Off"}
+                  </Paragraph>
                 </div>
-                <Paragraph size="sm" className="text-teal-300/60">
-                  Currently: {acceptMessages ? " On" : " Off"}
-                </Paragraph>
-              </div>
+              )}
 
               {/* Copy URL */}
-              <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-4">
-                <label className="text-sm font-medium block mb-2">
-                  Share Your Profile
-                </label>
-                <div className="flex space-x-2">
-                  <Input
-                    value={profileLink as string}
-                    readOnly
-                    className="bg-white/5 border-white/30 text-white rounded-lg"
-                  />
-                  <Button
-                    onClick={handleCopy}
-                    className="shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105"
-                  >
-                    <Copy className="h-5 w-5" />
-                  </Button>
+              {profileLink ? (
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-4">
+                  <label className="text-sm font-medium block mb-2">
+                    Share Your Profile
+                  </label>
+                  <div className="flex space-x-2">
+                    <Input
+                      value={profileLink ?? "loading..."}
+                      readOnly
+                      className="bg-white/5 border-white/30 text-white rounded-lg"
+                    />
+                    <Button
+                      onClick={handleCopy}
+                      className="shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105"
+                    >
+                      <Copy className="h-5 w-5" />
+                    </Button>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <ProfileLinkSkeleton />
+              )}
             </div>
           </div>
         </section>
@@ -251,7 +269,7 @@ export default function Dashboard() {
             </Button>
           </div>
 
-          {isLoading ? (
+          {isLoading || !hasFetched ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
               {Array.from({ length: Math.min(messages.length || 5, 6) }).map(
                 (_, i) => (

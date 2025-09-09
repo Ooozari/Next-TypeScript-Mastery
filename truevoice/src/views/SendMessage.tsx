@@ -26,9 +26,8 @@ import { ApiResponse } from "@/types/ApiResponse";
 export default function SendMessage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { username } = useParams(); // Extract username from URL (e.g., /u/username)
-<<<<<<< HEAD
-=======
->>>>>>> 86d8842cacc55df6d155c9c3801e312b5c471b83
+  const [remaining, setRemaining] = useState<number | undefined>();
+
   const [isAcceptingMessages, setIsAcceptingMessages] = useState<
     boolean | null
   >(null); // null while loading
@@ -70,19 +69,12 @@ export default function SendMessage() {
         content: data.content,
       });
       if (response.data.success) {
-<<<<<<< HEAD
-=======
-        const remaining = response.data.remaining;
+        setRemaining(response.data.remaining); // set remaining count
         toast.success(
-          `Message sent anonymously! You have ${remaining} messages left today.`,
-          {
-            duration: 5000,
-          }
+          `Message sent anonymously! You have ${response.data.remaining} messages left today.`,
+          { duration: 5000 }
         );
->>>>>>> 86d8842cacc55df6d155c9c3801e312b5c471b83
         sendMessageForm.reset();
-        // Optionally redirect or stay on page
-        // router.push(`/u/${username}/success`);
       } else {
         toast.error(response.data.message || "Failed to send message.");
       }
@@ -97,11 +89,12 @@ export default function SendMessage() {
   };
 
   return (
-    <div className="min-h-[100vh] bg-gradient-to-r from-teal-900 to-teal-700 relative ">
-      {/* Subtle texture overlay */}
-      <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
+    <div className="min-h-screen bg-gray-100">
       {/* Send Message Section */}
-      <section className="py-[100px] md:py-[120px] text-white relative min-h-[100vh] container mx-auto">
+      <section className="py-20 md:py-[120px] bg-gradient-to-r from-teal-900 to-teal-700 text-white overflow-hidden relative min-h-[100vh]">
+        {/* Subtle texture overlay */}
+        <div className="absolute inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
+
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Left: User Info */}
@@ -191,11 +184,10 @@ export default function SendMessage() {
                       </>
                     ) : (
                       <>
-<<<<<<< HEAD
-
-=======
-                        <Send className="mr-2 h-5 w-5" /> Send Anonymously
->>>>>>> 86d8842cacc55df6d155c9c3801e312b5c471b83
+                        <Send className="mr-2 h-5 w-5" />
+                        {remaining !== undefined
+                          ? `Send Anonymously (${remaining} left)`
+                          : "Send Anonymously"}
                       </>
                     )}
                   </Button>

@@ -48,12 +48,19 @@ export async function POST(request: Request) {
 
     // Increment or create sender record (if no sender already)
     if (!sender) {
+      // First time ever
       sender = await MessageLimit.create({
         senderIp: ip,
         date: today,
         count: 1,
       });
+    } else if (sender.date !== today) {
+      // New day → reset count
+      sender.date = today;
+      sender.count = 1;
+      await sender.save();
     } else {
+      // Same day → increment count
       sender.count += 1;
       await sender.save();
     }
@@ -68,8 +75,7 @@ export async function POST(request: Request) {
     const remaining = 5 - sender.count;
     return Response.json(
       { success: true, message: "Message sent successfully", remaining },
-      { status: 200 },
-     
+      { status: 200 }
     );
   } catch (error) {
     console.error("Failed to send message to user", error);

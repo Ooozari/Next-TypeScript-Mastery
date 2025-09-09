@@ -215,7 +215,7 @@ export default function Dashboard() {
                       Accept Anonymous Messages
                     </label>
                   </div>
-                  <Paragraph size="sm" className="text-teal-300/60">
+                  <Paragraph size="sm" className="text-teal-300/60 md:block hidden">
                     Currently: {acceptMessages ? " On" : " Off"}
                   </Paragraph>
                 </div>

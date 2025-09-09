@@ -145,12 +145,12 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gray-100">
       <main className="p-4 md:p-6">
         {/* Header */}
-        <header className="bg-gradient-to-r from-gray-900 to-teal-800 text-white rounded-2xl p-6 md:p-8 mb-8 shadow-2xl relative animate-fade-in container mx-auto">
+        <header className="bg-gradient-to-r from-gray-900 to-teal-800 text-white rounded-2xl p-4 md:p-8 mb-8 shadow-2xl relative animate-fade-in container mx-auto">
           <div className="absolute rounded-2xl inset-0 bg-black/20 mix-blend-multiply pointer-events-none"></div>
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <Link href="/">
-                <HatGlasses className="h-10 w-10 text-teal-300 animate-pulse" />
+                <HatGlasses className="w-8 h-8 md:h-10 md:w-10 xl:h-12 xl:w-12 text-teal-300 animate-pulse" />
               </Link>
               {username ? (
                 <Heading
@@ -166,9 +166,9 @@ export default function Dashboard() {
             <Button
               variant="glassy"
               onClick={() => signOut()}
-              className="flex items-center space-x-2 transition-all duration-300 hover:shadow-lg"
+              className="flex items-center space-x-1.5 md:space-x-2 transition-all duration-300 hover:shadow-lg"
             >
-              <LogOut className="h-5 w-5" />
+              <LogOut className="w-[18px] h-[18px] md:h-5 md:w-5" />
               <span>Log Out</span>
             </Button>
           </div>

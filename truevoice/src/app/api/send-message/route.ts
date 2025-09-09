@@ -32,19 +32,7 @@ export async function POST(request: Request) {
     }
 
     const today = new Date().toISOString().split("T")[0];
-    let sender = await MessageLimit.findOne({ senderIp: ip, date: today });
-
-    // daily limit reached
-    if (sender && sender.count >= 5) {
-      return Response.json(
-        {
-          success: false,
-          message:
-            "You have reached your daily message limit (5 messages per day).",
-        },
-        { status: 429 }
-      );
-    }
+    let sender = await MessageLimit.findOne({ senderIp: ip });
 
     // Increment or create sender record (if no sender already)
     if (!sender) {
@@ -60,6 +48,17 @@ export async function POST(request: Request) {
       sender.count = 1;
       await sender.save();
     } else {
+      // daily limit reached
+      if (sender && sender.count >= 5) {
+        return Response.json(
+          {
+            success: false,
+            message:
+              "You have reached your daily message limit (5 messages per day).",
+          },
+          { status: 429 }
+        );
+      }
       // Same day → increment count
       sender.count += 1;
       await sender.save();

@@ -26,7 +26,9 @@ import { ApiResponse } from "@/types/ApiResponse";
 export default function SendMessage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { username } = useParams(); // Extract username from URL (e.g., /u/username)
-  const [remaining, setRemaining] = useState(5);
+<<<<<<< HEAD
+=======
+>>>>>>> 86d8842cacc55df6d155c9c3801e312b5c471b83
   const [isAcceptingMessages, setIsAcceptingMessages] = useState<
     boolean | null
   >(null); // null while loading
@@ -68,7 +70,16 @@ export default function SendMessage() {
         content: data.content,
       });
       if (response.data.success) {
-        toast.success("Message sent anonymously!");
+<<<<<<< HEAD
+=======
+        const remaining = response.data.remaining;
+        toast.success(
+          `Message sent anonymously! You have ${remaining} messages left today.`,
+          {
+            duration: 5000,
+          }
+        );
+>>>>>>> 86d8842cacc55df6d155c9c3801e312b5c471b83
         sendMessageForm.reset();
         // Optionally redirect or stay on page
         // router.push(`/u/${username}/success`);
@@ -180,8 +191,11 @@ export default function SendMessage() {
                       </>
                     ) : (
                       <>
-                        <Send className="mr-2 h-5 w-5" />
-                        Send Anonymously ({remaining} remaining)
+<<<<<<< HEAD
+
+=======
+                        <Send className="mr-2 h-5 w-5" /> Send Anonymously
+>>>>>>> 86d8842cacc55df6d155c9c3801e312b5c471b83
                       </>
                     )}
                   </Button>

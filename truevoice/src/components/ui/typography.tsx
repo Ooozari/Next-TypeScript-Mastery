@@ -63,6 +63,7 @@ export function Heading({
 const paragraphVariants = cva("", {
   variants: {
     size: {
+      xl3: "text-[18px] sm:text-[24px] md:text-[30px]",
       xxl: "text-[16px] sm:text-[18px] md:text-[20px]",
       xl: "text-[14px] sm:text-[16px] md:text-[18px]", // using
       large: "text-[14px] md:text-[16px]", // using

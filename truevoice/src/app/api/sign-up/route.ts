@@ -6,9 +6,6 @@ import bcrypt from 'bcryptjs';
 // Helper function to send verification email
 import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
 
-
-
-
 export async function POST(request: Request) {
 
     //first it is compulsory to connect to database
@@ -17,12 +14,10 @@ export async function POST(request: Request) {
     try {
         // value from frontend
         const body = await request.json();
-        console.log("Raw Body:", body);  // Debugging line
+        console.log("Raw Body:", body);  //TODO: Debugging line
 
         const { username, email, password } = body;
-        console.log("Username:", username);
-        console.log("Email:", email);
-        console.log("Password:", password);
+    
 
         // Case 1: By Username in signUp
         const existingUserByUsername = await UserModel.findOne({
@@ -43,7 +38,6 @@ export async function POST(request: Request) {
 
 
         // Case 2: By Email
-
         const existingUserByEmail = await UserModel.findOne({
             email,
         })
@@ -130,10 +124,6 @@ export async function POST(request: Request) {
                 status: 500,
             })
     }
-
-
-
-
 }
 
 

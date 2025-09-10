@@ -17,7 +17,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { HatGlasses } from "lucide-react";
+import { HatGlasses, Loader2 } from "lucide-react";
 import { ApiResponse } from "@/types/ApiResponse";
 import { ForgotPasswordSchema } from "@/schemas/forgotPasswordSchema";
 import { PropagateLoader } from "react-spinners";
@@ -98,8 +98,9 @@ export default function ForgetPassword() {
             >
               {isSubmitting ? (
                 <>
-                  <div className="flex items-center">
-                    <PropagateLoader color="#ffffff" size={10} />
+                  <div className="flex gap-2 items-center">
+                    <Loader2 className="animate-spin h-5 w-5" />
+                    <span>Verifying...</span>
                   </div>
                 </>
               ) : (

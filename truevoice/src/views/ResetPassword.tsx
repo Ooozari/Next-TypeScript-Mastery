@@ -166,9 +166,10 @@ export default function ResetPassword() {
               >
                 {isSubmitting ? (
                   <>
-                    <div className="flex items-center">
-                      <PropagateLoader color="#ffffff" size={10} />
-                    </div>
+                    <div className="flex gap-2 items-center">
+                    <Loader2 className="animate-spin  h-5 w-5" />
+                    <span>Resetting...</span>
+                  </div>
                   </>
                 ) : (
                   "Reset Password"

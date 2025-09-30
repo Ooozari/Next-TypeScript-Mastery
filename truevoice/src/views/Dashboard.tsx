@@ -271,7 +271,7 @@ export default function Dashboard() {
 
           {isLoading || !hasFetched ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
-              {Array.from({ length: Math.min(messages.length || 5, 6) }).map(
+              {Array.from({ length: Math.min(messages.length || 3, 3) }).map(
                 (_, i) => (
                   <MessageSkeleton key={i} />
                 )
